@@ -1,7 +1,7 @@
 {
   "name": "inhousebpl",
-  "description": "InHouse League Battlerite Brasil",
-  "version": "0.2",
+  "description": "InHouse League Battlerite",
+  "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
