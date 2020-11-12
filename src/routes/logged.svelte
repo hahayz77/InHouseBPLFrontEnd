@@ -1,5 +1,10 @@
 <script>
 	import io from 'socket.io-client';
+	import { matchesStore } from '../stores/matches';
+	import Matches from '../components/Matches.svelte';
+
+
+	// import Teste from '../components/Teste.svelte'
 
 	const socket = io("http://localhost:8081/", {
 		'reconnectionDelay': 60000,
@@ -7,11 +12,23 @@
 		'reconnectionAttempts': 3
 	})
 
-	socket.on('matchInit', async (match) => {
+	socket.on('matchInit', async (matches) => {
 		try {
-			matches = await match;
-			console.log(await matches);
-			return await matches;
+			console.log(matches);
+			matchesStore.update((listaAtual)=>{
+				return matches;
+			})
+		} catch (error) {
+			throw {error}	
+		}
+	})
+
+
+	socket.on('matchUpdate', async (matches) => {
+		try {
+			matchesStore.update((listaAtual)=>{
+				return matches;
+			})
 		} catch (error) {
 			throw {error}	
 		}
@@ -49,10 +66,13 @@
 	function enterQueue(){
 		socket.emit('queueUpdate', {name: input.value});
 	}
+	// async function objectsUpdate(){
+	// 	console.log(await matches);
+	// 	return await matches;
+	// }
 
 	let input = '';
 	let queuePlayers;
-	let matches;
 
 </script>
 
@@ -85,21 +105,12 @@
 	{/if}
 	
 
-	{#if matches == undefined}
-		<h2 style="color: white">Carregando as Partidas...</h2>
-	{:else if matches == ""}
-		<h2 style="color: white">Nenhum Partida em Andamento!</h2>
+	{#if $matchesStore === undefined}
+		<h2 style="color: white">Carregando partidas...</h2>
+	{:else if $matchesStore == ''}
+		<h2 style="color: white">Nenhuma partida em adamento!</h2>
 	{:else}
-				
-				<div class="item">
-				{#each matches.teams as teams, id}
-					<span>{teams} +</span>
-				{/each}
-				{#each matches.result as teams, id}
-					<span>{teams}</span>
-				{/each}
-				</div>
-				
+		<Matches />
 	{/if}
 
 

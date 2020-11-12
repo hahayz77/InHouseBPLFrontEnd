@@ -18,10 +18,6 @@
 //   module.exports.clicklogin = clicklogin;
 
 	// ########################################### Functions Usuário
-	// function clickfetch(){
-	// 	resulte = clicklogin();
-	// 	alert(resulte);
-	// }
 
 	async function clicknewuser(){
 		newuser = 1;
@@ -44,6 +40,10 @@
 			alert("Passwords não conferem")
 		}
 		else{
+			// const fetchcreateuser = async () => {
+			// const res = await fetch(fetchURL +'/login')
+			// return await res.json();
+			// }
 			alert("usuário criado com sucesso!")
 		}
 	}
