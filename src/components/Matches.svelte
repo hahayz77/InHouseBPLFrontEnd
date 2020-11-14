@@ -1,5 +1,5 @@
 <script>
-import { matchesStore } from '../stores/matches'
+import { matchesStore } from '../stores/matchesStore'
 
 </script>
 

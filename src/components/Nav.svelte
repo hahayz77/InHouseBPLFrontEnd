@@ -1,6 +1,30 @@
 <script>
+	import { userStore } from '../stores/userStore'
 	export let segment;
+
+
 </script>
+
+
+<nav class="navbar navbar-expand-lg">
+	<a class="navbar-brand" href="/">Pobre League</a>
+  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+  	</button>
+ 	 <div class="collapse navbar-collapse" id="navbarText">
+		<ul class="navbar-nav ml-auto">
+			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
+			<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>	
+			{#if $userStore.name === ''}
+				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">login</a></li>
+			{:else}
+				<li><a aria-current="{segment === 'user' ? 'page' : undefined}" href="User">{$userStore.name}</a></li>		
+			{/if}
+		</ul>
+	</div>
+
+</nav>
+
 
 <style>
 	nav {
@@ -36,7 +60,7 @@
 		content: '';
 		width: calc(100% - 1em);
 		height: 2px;
-		background-color: rgb(255,62,0);
+		background-color: rgba(89, 0, 255, 0.3);
 		display: block;
 		bottom: -1px;
 	}
@@ -47,14 +71,3 @@
 		display: block;
 	}
 </style>
-
-<nav>
-	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
-	</ul>
-</nav>

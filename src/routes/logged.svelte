@@ -1,6 +1,7 @@
 <script>
 	import io from 'socket.io-client';
-	import { matchesStore } from '../stores/matches';
+	import { matchesStore } from '../stores/matchesStore';
+	import { userStore } from '../stores/userStore';
 	import Matches from '../components/Matches.svelte';
 
 
@@ -14,7 +15,6 @@
 
 	socket.on('matchInit', async (matches) => {
 		try {
-			console.log(matches);
 			matchesStore.update((listaAtual)=>{
 				return matches;
 			})
@@ -55,21 +55,11 @@
 	socket.on('error', (err) => {
 		console.log("error");
 	})
-
-	socket.on('newMatch', async (matches)=>{
-		queuePlayers =  await matches;
-		return queuePlayers;
-		console.log("newMatch");
-	})
 	
 
 	function enterQueue(){
 		socket.emit('queueUpdate', {name: input.value});
 	}
-	// async function objectsUpdate(){
-	// 	console.log(await matches);
-	// 	return await matches;
-	// }
 
 	let input = '';
 	let queuePlayers;
@@ -79,6 +69,22 @@
 <svelte:head>
 	<title>Logged</title>
 </svelte:head>
+	<section class="container jumbotron">
+		<div class="row">
+			<div class="col-6">
+				<img src="/champions/{$userStore.main}.jpg" alt="">
+				<h1>{$userStore.name}</h1>
+				<h2>Pontos: {$userStore.points}</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<h3>Main: {$userStore.main}</h3>
+			</div>
+		</div>
+		
+	</section>
+
 
 	<section class="container jumbotron">
 		

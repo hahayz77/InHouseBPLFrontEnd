@@ -1,6 +1,6 @@
 <script>
-	import { clicklogin } from '../functions/user'
 	import { goto } from '@sapper/app';
+	import { userStore } from '../stores/userStore'
 	
 	let fetchURL = "http://localhost:8081";
 	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
@@ -12,10 +12,13 @@
 	let passwordconfirm = '';
 	let newuser = 0;
 
+	if($userStore.id !== ""){
+		alert("Você já está logado!");
+		goto("/logged");
+	}
+
 	// ########################################### Functions SERVER
 	let resulte;
-
-//   module.exports.clicklogin = clicklogin;
 
 	// ########################################### Functions Usuário
 
@@ -26,13 +29,33 @@
 		newuser = 0;
 	}
 
-	function clickloginButton(){
-		clicklogin();
-		goto('/logged');
+	async function loginUser () {
+		try {
+			const login = await fetch(fetchURL + '/user/login', {
+				method: 'POST',
+				headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+				body: JSON.stringify({name: username, password: password})
+			})
+			const result = await login.json();
+			console.log(result);
+			if(result.mensagem === "Logado com sucesso!"){
+				userStore.update(()=>{ return result });
+				goto('/logged');
+				return result;
+			}
+			else{
+				alert("error");
+				return;
+			}
+			
+			return
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
-	function createuser(){
-		alert("Criar novo usuário")
+	async function createuser(){
+		alert("Criar novo usuário");
 		if(useremail === "" || username === "" || password === "" || passwordconfirm === ""){
 			alert("Erro! - Preencha todos os dados corretamente")
 		} 
@@ -40,11 +63,21 @@
 			alert("Passwords não conferem")
 		}
 		else{
-			// const fetchcreateuser = async () => {
-			// const res = await fetch(fetchURL +'/login')
-			// return await res.json();
-			// }
-			alert("usuário criado com sucesso!")
+			try {
+				const login = await fetch(fetchURL + '/user/register', {
+					method: 'POST',
+					headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+					body: JSON.stringify({email: useremail, name: username, password: password})
+				})
+				const result = await login.json();
+				console.log(result);
+				userStore.update(()=>{ return result });
+				goto('/logged');
+				return result;
+				return
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 
@@ -66,18 +99,18 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-					<form on:submit|preventDefault={clickloginButton}>
+					<form on:submit|preventDefault={loginUser}>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" name="" class="form-control input_user" bind:value={username} placeholder="Usuário/Email" required>
+							<input type="text" class="form-control input_user" bind:value={username} placeholder="Usuário" required>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name="" class="form-control input_pass" bind:value={password} placeholder="Senha" required>
+							<input type="password" class="form-control input_pass" bind:value={password} placeholder="Senha" required>
 						</div>
 						<div class="d-flex justify-content-center mt-3 login_container">
 							<input type="submit" class="btn login_btn" value="Login">
@@ -180,7 +213,7 @@
 			object-fit: cover;
 		}
 		.form_container {
-			margin-top: 100px;
+			margin-top: 90px;
 		}
 		.login_btn {
 			width: 100%;
