@@ -4,9 +4,8 @@ export const userStore = writable(
     {
     menssagem: "",
     id: "",
-    name: "Hahay",
-    main: 'Ulric',
+    name: "hahay2",
+    main: 'Sirius',
     points: '0',
-    img: 'Freya'
   }
   );

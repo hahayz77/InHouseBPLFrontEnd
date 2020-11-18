@@ -41,14 +41,14 @@
 			if(result.mensagem === "Logado com sucesso!"){
 				userStore.update(()=>{ return result });
 				goto('/logged');
-				return result;
+				return;
 			}
 			else{
 				alert("error");
 				return;
 			}
 			
-			return
+			return;
 		} catch (error) {
 			console.log(error)
 		}

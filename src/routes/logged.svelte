@@ -1,17 +1,29 @@
 <script>
 	import io from 'socket.io-client';
+
+	import { fade } from 'svelte/transition';
+
 	import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
+	import { reportStore } from '../stores/reportStore';
+
 	import Matches from '../components/Matches.svelte';
+	import Report from '../components/Report.svelte';
+	import Erro from '../components/Erro.svelte';
 
-
-	// import Teste from '../components/Teste.svelte'
 
 	const socket = io("http://localhost:8081/", {
-		'reconnectionDelay': 60000,
-		'reconnectionDelayMax' : 90000,
-		'reconnectionAttempts': 3
-	})
+		transports: ['websocket']
+	})		
+
+	let fetchURL = "http://localhost:8081";
+	let error, status;
+	let input = '';
+	let queuePlayers;
+	let reportMatch, reportResult;
+	let reportRes;
+	
+	// ########################################   MATCH
 
 	socket.on('matchInit', async (matches) => {
 		try {
@@ -34,6 +46,7 @@
 		}
 	})
 
+	// ########################################   QUEUE
 
 	socket.on('queueInit', async (queue) => {
 		try {
@@ -53,60 +66,43 @@
 		}
 	})
 
-	function enterQueue(){
+	async function enterQueue(){
 		socket.emit('queueUpdate', {name: input.value});
 	}
 
-	socket.on('reportInit', async(report)=>{
-		try {
-			const reportResponse =  await report;
-			reportResult = reportResponse;
-			return reportResult;
-		} catch (error) {
-			throw {error}
+	// ########################################   REPORT
+	async function clickReport(){
+		var response = await fetch(fetchURL + '/match/report/'+ $userStore.name);
+		reportRes = await response.json();
+		reportStore.update(()=>{ return reportRes });
+		if(reportRes.status === "nomatch"){
+			return;
 		}
-	})
-
-	socket.on('reportUpdate', async(report)=>{
-		try {
-			reportMatch =  await report;
-			return await reportMatch;
-		} catch (error) {
-			throw {error}
-		}
-	})
-
-	function report(){
-		var myTeam;
-		var otherTeam;
-		if($userStore.name === reportResult.teams[0] || $userStore.name === reportResult.teams[1] || $userStore.name === reportResult.teams[2]){
-			myTeam = selectTeamA;
-			otherTeam = selectTeamB;
-		}
-		else{
-			myTeam = selectTeamB;
-			otherTeam = selectTeamA;
-		}
-		socket.emit('reportUpdate', {selectTeamA, selectTeamB, selectProblem});
 		return;
 	}
 
-	socket.on('error', (err) => {
-		console.log("error");
+	async function reportSocket(report){
+		socket.emit("report", report);
+	}
+	
+
+	  // ########################################   ERROR
+	  
+	socket.on('error', async (err) => {
+		error = await err;
+		console.log(error);
+		await setTimeout(()=>{ error = undefined }, 3000);
+		return;
 	})
-
-
-	let input = '';
-	let queuePlayers;
-	let reportMatch;
-	let reportResult;
-	let selectTeamA, selectTeamB, selectProblem;
-
 </script>
 
 <svelte:head>
 	<title>Logged</title>
 </svelte:head>
+
+{#if error !== undefined}<Erro  error={error.error.error}/>{/if}
+
+
 <section class="container jumbotron">
 	<div class="row">
 		<div class="col-12 col-sm-6 px-3">
@@ -118,54 +114,12 @@
 					<h3>Main: {$userStore.main}</h3>
 					<h4>Partidas</h4>
 					<h4>Winrate</h4>
-					<p>{selectTeamA + selectTeamB + selectProblem}</p>
+					<input type="button" on:click={clickReport} class="btn btn-danger" value="Reportar Resultado" data-toggle="modal" data-target="#exampleModal">
 					</div>
 			</div>
 		</div>
 		<div class="col-12 col-sm-6 alignjustify-content-center">
-			<div class="row">
-				<div></div>
-				<form on:submit|preventDefault={report} class="mx-auto">
-					<div class="card text-center">
-						<div class="card-header"><h3>Reportar Resultado</h3></div>
-							<div class="card-body">
-								{#if reportResult === undefined}
-									<h3>"Nenhuma partida encontrada"</h3>
-								{:else if reportResult.mensagem === "Nenhuma partida encontrada"}
-									<h3>"Nenhuma partida encontrada"</h3>
-								{:else}
-								<div class="row">
-									<div class="col-6">
-									<h5 class="card-title">Time A</h5>
-									<select bind:value={selectTeamA} class="form-control bg-primary text-light">
-										<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option class="bg-success">5</option>
-									</select>
-								</div>
-								<div class="col-6">
-									<h5 class="card-title">Time B</h5>
-									<select bind:value={selectTeamB} class="form-control bg-danger text-light">
-										<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option class="bg-success">5</option>
-									</select>
-								</div>
-								</div>
-								<div>
-									<h5 class="mt-3">Reportar Problema</h5>
-									<select bind:value={selectProblem} class="form-control bg-warning mb-4">
-										<option>Nenhum problema</option>
-										<option>Player inativo</option>
-										<option>Cancelar partida</option>
-										<option>Outro problema</option>
-									</select>
-								</div>
-								<input type="submit" class="btn btn-success" value="Enviar Resultado">
-								{/if}
-							</div>
-							<div class="card-footer text-muted">Você está no time <span>A</span></div>
-							<div class="card-footer text-muted">ID DA PARTIDA "ID" <span>A</span></div>
-						</div>
-					</form>
-				</div>
-			</div>
+			<Report />
 		</div>
 
 </section>
