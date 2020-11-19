@@ -13,7 +13,7 @@
     bottom: 0;
     right: 0;
     text-align:center;
-    z-index:100;
+    z-index: 99999;
   }
   i{
     font-size: 50px;

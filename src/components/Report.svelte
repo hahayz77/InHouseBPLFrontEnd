@@ -1,11 +1,13 @@
 <script>
   import { reportStore } from "../stores/reportStore";
   import { userStore } from "../stores/userStore";
-
+  import { matchesStore } from "../stores/matchesStore";
+  import Status from '../components/Status.svelte';
 
   let teamA, teamB, problem, team;
+  let response;
+  let statusresponse;
   let fetchURL = "http://localhost:8081";
-  $: {console.log($reportStore.teams);}
 
   async function report() {
     try {
@@ -13,7 +15,8 @@
         alert(problem);
       }
       else if(teamA === "5" && teamB === "5"){alert("Erro nos dados! Apenas um time pode vencer 5 rounds!");}
-      else if(teamA === "0" && teamB === "0"){alert("Erro nos dados! Um time precisa vencer 5 rounds!");}
+      else if(teamA === "0" && teamB === "0"){alert("Erro nos dados! Um dos time precisa vencer 5 rounds!");}
+      else if(teamA !== "5" && teamB !== "5"){alert("Erro nos dados! Um dos times precisa vencer 5 rounds!");}
       else{
         if($userStore.name === $reportStore.teams[0] ||$userStore.name === $reportStore.teams[1] ||$userStore.name === $reportStore.teams[2]){
           team = "A";
@@ -30,15 +33,24 @@
           })
         })
         const result = await login.json();
-        console.log(result);
-
+        if(result.status !== undefined){
+          statusresponse = result.status;
+          await setTimeout(()=>{ statusresponse = undefined }, 3000);
+        }
+        if(result.update !== undefined){
+          matchesStore.update((listaAtual)=>{ return result.update })
+        }
       }
+      return;
 
     } catch (error) {
       throw {error};
+      return;
     }
   }
 </script>
+
+{#if statusresponse !== undefined}<Status  status={statusresponse}/>{/if}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -90,8 +102,8 @@
       <div class="modal-footer">
         <p>{$reportStore.teamA}
         <p>{$reportStore.teamB}
-        <p>{$reportStore.preresult.teama}</p>
-        <p>{$reportStore.preresult.teamb}</p>
+        <p>{$reportStore.preresult.teama || "TeamA"}</p>
+        <p>{$reportStore.preresult.teamb || "TeamB"}</p>
       </div>
     </div>
   </div>

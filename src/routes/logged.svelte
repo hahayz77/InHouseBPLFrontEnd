@@ -74,7 +74,11 @@
 	async function clickReport(){
 		var response = await fetch(fetchURL + '/match/report/'+ $userStore.name);
 		reportRes = await response.json();
-		reportStore.update(()=>{ return reportRes });
+		console.log(reportRes);
+		if(reportRes.id !== undefined){
+			reportStore.update(()=>{ return reportRes });
+			matchesStore.update(()=>{return reportRes.machesupdate})
+		}
 		if(reportRes.status === "nomatch"){
 			return;
 		}

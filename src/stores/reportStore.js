@@ -6,5 +6,8 @@ export const reportStore = writable({
     id: "",
     teams: [0,0,0,0,0,0],
     reported: "",
-    preresult: ""
+    preresult: {
+        teama: "",
+        teamb: ""
+    }
 });
