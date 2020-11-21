@@ -2,71 +2,101 @@
   import { reportStore } from "../stores/reportStore";
   import { userStore } from "../stores/userStore";
   import { matchesStore } from "../stores/matchesStore";
-  import Status from '../components/Status.svelte';
+  import Status from "../components/Status.svelte";
 
   let teamA, teamB, problem, team;
   let response;
   let statusresponse;
   let fetchURL = "http://localhost:8081";
 
-  async function report() {
+  async function report(userValue, reportValue) {
     try {
-      if(problem !== "Nenhum problema"){
+      if (problem !== "Nenhum problema") {
         alert(problem);
-      }
-      else if(teamA === "5" && teamB === "5"){alert("Erro nos dados! Apenas um time pode vencer 5 rounds!");}
-      else if(teamA === "0" && teamB === "0"){alert("Erro nos dados! Um dos time precisa vencer 5 rounds!");}
-      else if(teamA !== "5" && teamB !== "5"){alert("Erro nos dados! Um dos times precisa vencer 5 rounds!");}
-      else{
-        if($userStore.name === $reportStore.teams[0] ||$userStore.name === $reportStore.teams[1] ||$userStore.name === $reportStore.teams[2]){
+      } else if (teamA === "5" && teamB === "5") {
+        alert("Erro nos dados! Apenas um time pode vencer 5 rounds!");
+      } else if (teamA === "0" && teamB === "0") {
+        alert("Erro nos dados! Um dos time precisa vencer 5 rounds!");
+      } else if (teamA !== "5" && teamB !== "5") {
+        alert("Erro nos dados! Um dos times precisa vencer 5 rounds!");
+      } else {
+        if (userValue.name === reportValue.teams[0] || userValue.name === reportValue.teams[1] || userValue.name === reportValue.teams[2]) {
           team = "A";
-        } else { team = "B"; }
-        const login = await fetch(fetchURL + '/match/result', {
-        method: 'PATCH',
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-          team: team,
-          preresult: [teamA, teamB],
-          problem: problem,
-          id: $reportStore.id,
-          player: $userStore.name
+        } else {
+          team = "B";
+        }
+        const fetchMatch = await fetch(fetchURL + "/match/result", {
+          method: "PATCH",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify({
+            team: team,
+            preresult: [teamA, teamB],
+            problem: problem,
+            id: reportValue.id,
+            player: userValue.name
           })
         })
-        const result = await login.json();
-        if(result.status !== undefined){
-          statusresponse = result.status;
-          await setTimeout(()=>{ statusresponse = undefined }, 3000);
+        const result = await fetchMatch.json();
+        if (result.status !== undefined) {
+          statusresponse = result.mensagem;
+          await setTimeout(() => { statusresponse = undefined }, 3000)
         }
-        if(result.update !== undefined){
-          matchesStore.update((listaAtual)=>{ return result.update })
+        if (result.update !== undefined) {
+          matchesStore.update(listaAtual => { return result.update })
         }
       }
+      // Fetch Update para que todos recebam Update da partida neste logal em conflito com result.update
       return;
-
     } catch (error) {
-      throw {error};
+      throw { error };
       return;
     }
   }
+
+  async function update(){
+    // try {
+    //   const fetchMatch = await fetch(fetchURL + "/match/update/" + $userStore.name )
+    //   const result = await fetchMatch.json();
+    //   matchesStore.update(listaAtual => { return result.matches })
+    //   userStore.update(listaAtual => { return result.user })
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+  }
 </script>
 
-{#if statusresponse !== undefined}<Status  status={statusresponse}/>{/if}
+{#if statusresponse !== undefined}
+  <Status status={statusresponse} />
+{/if}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Reportar Resultado </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span> 
+        <h5 class="modal-title" id="exampleModalLabel">Reportar Resultado</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form on:submit|preventDefault={report} class="mx-auto">
+        <form on:submit|preventDefault={() => {report($userStore, $reportStore); update()}} class="mx-auto">
           <div class="row">
             <div class="col-6">
               <h5 class="card-title">Time A</h5>
-              <select bind:value={teamA} class="form-control bg-primary text-light">
+              <select
+                bind:value={teamA}
+                class="form-control bg-primary text-light">
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
@@ -77,7 +107,9 @@
             </div>
             <div class="col-6">
               <h5 class="card-title">Time B</h5>
-              <select bind:value={teamB} class="form-control bg-danger text-light">
+              <select
+                bind:value={teamB}
+                class="form-control bg-danger text-light">
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
@@ -95,15 +127,18 @@
               <option>Cancelar partida</option>
               <option>Outro problema</option>
             </select>
-            <input type="submit" class="btn btn-success" value="Enviar Resultado" />
+            <input
+              type="submit"
+              class="btn btn-success"
+              value="Enviar Resultado" />
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <p>{$reportStore.teamA}
-        <p>{$reportStore.teamB}
-        <p>{$reportStore.preresult.teama || "TeamA"}</p>
-        <p>{$reportStore.preresult.teamb || "TeamB"}</p>
+        <p>{$reportStore.teamA}</p>
+        <p>{$reportStore.teamB}</p>
+        <p>{$reportStore.preresult.teama || 'TeamA'}</p>
+        <p>{$reportStore.preresult.teamb || 'TeamB'}</p>
       </div>
     </div>
   </div>
