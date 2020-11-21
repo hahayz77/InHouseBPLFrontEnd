@@ -76,8 +76,7 @@
 		reportRes = await response.json();
 		console.log(reportRes);
 		if(reportRes.id !== undefined){
-			reportStore.update(()=>{ return reportRes });
-			matchesStore.update(()=>{return reportRes.machesupdate})
+			reportStore.update(()=>{ return reportRes })
 		}
 		if(reportRes.status === "nomatch"){
 			return;

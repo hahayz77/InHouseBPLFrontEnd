@@ -37,13 +37,12 @@
           })
         })
         const result = await fetchMatch.json();
+        console.log(result)
         if (result.status !== undefined) {
           statusresponse = result.mensagem;
           await setTimeout(() => { statusresponse = undefined }, 3000)
         }
-        if (result.update !== undefined) {
-          matchesStore.update(listaAtual => { return result.update })
-        }
+        update();
       }
       // Fetch Update para que todos recebam Update da partida neste logal em conflito com result.update
       return;
@@ -54,14 +53,14 @@
   }
 
   async function update(){
-    // try {
-    //   const fetchMatch = await fetch(fetchURL + "/match/update/" + $userStore.name )
-    //   const result = await fetchMatch.json();
-    //   matchesStore.update(listaAtual => { return result.matches })
-    //   userStore.update(listaAtual => { return result.user })
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const fetchUpdate = await fetch(fetchURL + "/match/update/" + $userStore.name )
+      const result = await fetchUpdate.json();
+      matchesStore.update(listaAtual => { return result.matches })
+      userStore.update(listaAtual => { return result.user })
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 </script>
@@ -69,6 +68,7 @@
 {#if statusresponse !== undefined}
   <Status status={statusresponse} />
 {/if}
+
 
 <div
   class="modal fade"
@@ -89,8 +89,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      {#if $reportStore.preresult.teama === '' || $reportStore.preresult.teama === ''}
+      <div class="mx-auto py-5 my-5"><h4>Nada para reportar!</h4></div>
+      {:else}
       <div class="modal-body">
-        <form on:submit|preventDefault={() => {report($userStore, $reportStore); update()}} class="mx-auto">
+        <form on:submit|preventDefault={() => {report($userStore, $reportStore)}} class="mx-auto">
           <div class="row">
             <div class="col-6">
               <h5 class="card-title">Time A</h5>
@@ -135,11 +138,10 @@
         </form>
       </div>
       <div class="modal-footer">
-        <p>{$reportStore.teamA}</p>
-        <p>{$reportStore.teamB}</p>
-        <p>{$reportStore.preresult.teama || 'TeamA'}</p>
-        <p>{$reportStore.preresult.teamb || 'TeamB'}</p>
+      <p>Time A: {$reportStore.preresult.teama}</p>
+      <p>Time B: {$reportStore.preresult.teamb}</p>
       </div>
+     {/if}
     </div>
   </div>
 </div>
