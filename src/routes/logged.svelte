@@ -22,7 +22,19 @@
 	let queuePlayers;
 	let reportMatch, reportResult;
 	let reportRes;
-	
+
+
+	async function update(){
+    try {
+      const fetchUpdate = await fetch(fetchURL + "/match/update/" + $userStore.name )
+      const result = await fetchUpdate.json();
+      matchesStore.update(listaAtual => { return result.matches })
+      userStore.update(listaAtual => { return result.user })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 	// ########################################   MATCH
 
 	socket.on('matchInit', async (matches) => {
@@ -67,7 +79,20 @@
 	})
 
 	async function enterQueue(){
-		socket.emit('queueUpdate', {name: input.value});
+		await update();
+		if ($matchesStore[0] === undefined){
+			socket.emit('queueUpdate', {name: input.value});
+		}
+		else{
+			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
+			if( letQueue === -1){
+				socket.emit('queueUpdate', {name: input.value})
+			}
+			else{
+			error = "Você tem uma partida para finalizar!";
+			await setTimeout(() => {error = undefined}, 3000);
+			}
+		}
 	}
 
 	// ########################################   REPORT
@@ -82,10 +107,6 @@
 			return;
 		}
 		return;
-	}
-
-	async function reportSocket(report){
-		socket.emit("report", report);
 	}
 	
 
@@ -103,7 +124,7 @@
 	<title>Logged</title>
 </svelte:head>
 
-{#if error !== undefined}<Erro  error={error.error.error}/>{/if}
+{#if error !== undefined}<Erro  error={error}/>{/if}
 
 
 <section class="container jumbotron">

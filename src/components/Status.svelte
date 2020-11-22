@@ -1,6 +1,7 @@
 <script>
   import { fade } from 'svelte/transition';
-  export let status; 
+  export let status;
+
 </script>
 
 <div transition:fade class="alert alert-success p-3 mx-auto my-0" role="alert">

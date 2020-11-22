@@ -43,6 +43,8 @@
           await setTimeout(() => { statusresponse = undefined }, 3000)
         }
         update();
+        $reportStore.preresult.teama = '';
+        $reportStore.preresult.teamb = '';  
       }
       // Fetch Update para que todos recebam Update da partida neste logal em conflito com result.update
       return;
@@ -61,7 +63,6 @@
     } catch (error) {
       console.log(error);
     }
-
   }
 </script>
 
@@ -89,7 +90,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {#if $reportStore.preresult.teama === '' || $reportStore.preresult.teama === ''}
+      {#if $reportStore.preresult.teama === '' || $reportStore.preresult.teamb === ''}
       <div class="mx-auto py-5 my-5"><h4>Nada para reportar!</h4></div>
       {:else}
       <div class="modal-body">
