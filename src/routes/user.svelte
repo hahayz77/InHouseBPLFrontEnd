@@ -3,6 +3,9 @@
 
 	import { fade } from 'svelte/transition';
 
+	import { goto } from '@sapper/app';
+	import { onMount } from 'svelte';
+
 	import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
@@ -23,6 +26,11 @@
 	let reportMatch, reportResult;
 	let reportRes;
 
+	onMount(() => {
+		if($userStore.id === '' || $userStore._id === ''){
+			goto('/login');
+		}
+	})
 
 	async function update(){
     try {
