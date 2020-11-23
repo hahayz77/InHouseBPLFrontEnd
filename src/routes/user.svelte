@@ -81,18 +81,22 @@
 	async function enterQueue(){
 		await update();
 		if ($matchesStore[0] === undefined){
-			socket.emit('queueUpdate', {name: input.value});
+			socket.emit('queueUpdate', {name: $userStore.name});
 		}
 		else{
 			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
 			if( letQueue === -1){
-				socket.emit('queueUpdate', {name: input.value})
+				socket.emit('queueUpdate', {name: $userStore.name})
 			}
 			else{
 			error = "Você tem uma partida para finalizar!";
 			await setTimeout(() => {error = undefined}, 3000);
 			}
 		}
+	}
+
+		async function outQueue(){
+				socket.emit('queueDelete', $userStore.id || $userStore._id);
 	}
 
 	// ########################################   REPORT
@@ -127,7 +131,7 @@
 {#if error !== undefined}<Erro  error={error}/>{/if}
 
 
-<section class="container jumbotron">
+<section transition:fade class="container jumbotron">
 	<div class="row">
 		<div class="col-12 col-sm-6 px-3">
 			<div class="card">
@@ -138,7 +142,9 @@
 					<h3>Main: {$userStore.main}</h3>
 					<h4>Partidas</h4>
 					<h4>Winrate</h4>
-					<input type="button" on:click={clickReport} class="btn btn-danger" value="Reportar Resultado" data-toggle="modal" data-target="#exampleModal">
+					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
+					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
+					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#exampleModal">
 					</div>
 			</div>
 		</div>
@@ -149,7 +155,7 @@
 </section>
 
 
-	<section class="container jumbotron">
+	<section transition:fade class="container jumbotron">
 		
 		<div class="row">
 			<div class="col">
@@ -186,5 +192,8 @@
 <style>
 	.card{
 		background-color: transparent ;
+	}
+	.btn{
+		border-radius: 25px;
 	}
 </style>

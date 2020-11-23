@@ -15,10 +15,10 @@
 		<ul class="navbar-nav ml-auto">
 			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
 			<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>	
-			{#if $userStore.name === ''}
+			{#if $userStore.name === 'none'}
 				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">login</a></li>
 			{:else}
-				<li><a aria-current="{segment === 'user' ? 'page' : undefined}" href="User">{$userStore.name}</a></li>		
+				<li><a aria-current="{segment === 'user' ? 'page' : undefined}" href="user">{$userStore.name}</a></li>		
 			{/if}
 		</ul>
 	</div>

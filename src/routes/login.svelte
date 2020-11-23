@@ -1,6 +1,8 @@
 <script>
 	import { goto } from '@sapper/app';
 	import { userStore } from '../stores/userStore'
+
+	import { fade } from 'svelte/transition';
 	
 	let fetchURL = "http://localhost:8081";
 	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
@@ -11,10 +13,11 @@
 	let password = '';
 	let passwordconfirm = '';
 	let newuser = 0;
+	let loginIcon = false;
 
 	if($userStore.id !== ""){
 		alert("Você já está logado!");
-		goto("/logged");
+		goto("/user");
 	}
 
 	// ########################################### Functions SERVER
@@ -31,6 +34,7 @@
 
 	async function loginUser () {
 		try {
+			loginIcon = true;
 			const login = await fetch(fetchURL + '/user/login', {
 				method: 'POST',
 				headers: {'Accept': 'application/json','Content-Type': 'application/json'},
@@ -40,10 +44,12 @@
 			console.log(result);
 			if(result.mensagem === "Logado com sucesso!"){
 				userStore.update(()=>{ return result });
-				goto('/logged');
+				goto('/user');
+				loginIcon = false;
 				return;
 			}
 			else{
+				loginIcon = false;
 				alert("error");
 				return;
 			}
@@ -64,6 +70,7 @@
 		}
 		else{
 			try {
+				loginIcon = true;
 				const login = await fetch(fetchURL + '/user/register', {
 					method: 'POST',
 					headers: {'Accept': 'application/json','Content-Type': 'application/json'},
@@ -72,9 +79,9 @@
 				const result = await login.json();
 				console.log(result);
 				userStore.update(()=>{ return result });
-				goto('/logged');
+				goto('/user');
+				loginIcon = false;
 				return result;
-				return
 			} catch (error) {
 				console.log(error)
 			}
@@ -89,7 +96,7 @@
 </svelte:head>
 
 {#if newuser === 0}
-<section class="container jumbotron">
+<section transition:fade class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -128,7 +135,7 @@
 	</div>
 </section>
 {:else}
-	<section class="container jumbotron">
+	<section transition:fade class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -178,7 +185,6 @@
 		</div>
 	</div>
 </section>
-
 {/if}
 
 

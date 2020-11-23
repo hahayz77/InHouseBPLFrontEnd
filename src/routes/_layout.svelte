@@ -2,6 +2,8 @@
 	import Nav from '../components/Nav.svelte';
 	import { onMount } from 'svelte';
 
+	import { fade } from 'svelte/transition';
+
 	export let segment;
 	export let loadingPage = true;
 
@@ -9,6 +11,23 @@
 		setTimeout(() => { loadingPage = false }, 2000);
 	})
 </script>
+
+<Nav {segment}/>
+
+	{#if loadingPage}
+		<div class="background">
+			<img src="favicon.png" alt="adas">
+		</div>
+	{/if}
+
+	<div class="backgroundVideo"></div>
+		<video autoplay muted loop id="myVideo">
+			<source src="video.webm" type="video/webm">
+		</video>
+	
+	<main transition:fade>
+		<slot></slot>
+	</main>
 
 <style>
 
@@ -62,19 +81,3 @@
 	}
 
 </style>
-
-<Nav {segment}/>
-
-	{#if loadingPage}
-		<div class="background">
-			<img src="favicon.png" alt="adas">
-		</div>
-	{/if}
-
-	<div class="backgroundVideo"></div>
-		<video autoplay muted loop id="myVideo">
-			<source src="video.webm" type="video/webm">
-		</video>
-	
-
-	<slot></slot>
