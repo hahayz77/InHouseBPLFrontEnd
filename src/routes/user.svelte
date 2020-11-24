@@ -25,10 +25,20 @@
 	let queuePlayers;
 	let reportMatch, reportResult;
 	let reportRes;
+	let winrate;
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-			goto('/login');
+			window.location.replace("http://localhost:3000/login")
+		}
+		if ($userStore.name !== "none"){
+			if($userStore.wins !== 0 || $userStore.loses !== 0){
+				winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
+			}
+			else{
+				winrate = "Sem partidas ainda..."
+			}
+			
 		}
 	})
 
@@ -103,6 +113,23 @@
 		}
 	}
 
+	async function enterQueueINPUT(){
+		await update();
+		if ($matchesStore[0] === undefined){
+			socket.emit('queueUpdate', {name: input.value});
+		}
+		else{
+			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
+			if( letQueue === -1){
+				socket.emit('queueUpdate', {name: input.value})
+			}
+			else{
+			error = "Você tem uma partida para finalizar!";
+			await setTimeout(() => {error = undefined}, 3000);
+			}
+		}
+	}
+
 		async function outQueue(){
 				socket.emit('queueDelete', $userStore.id || $userStore._id);
 	}
@@ -146,10 +173,11 @@
 				<div class="card-header"><h2>{$userStore.name}</h2></div>
 				<div class="card-body">
 					<img class="d-block mr-auto rounded-pill" src="/champions/{$userStore.main}.jpg" alt="">
-					<h2>Pontos: {$userStore.points}</h2>
-					<h3>Main: {$userStore.main}</h3>
-					<h4>Partidas</h4>
-					<h4>Winrate</h4>
+					<h4>Pontos: {$userStore.points}</h4>
+					<h5>Main: {$userStore.main}</h5>
+					<h5>Vitórias: {$userStore.wins}</h5>
+					<h5>Derrotas: {$userStore.loses}</h5>
+					<h5>Winrate: {winrate}%</h5>
 					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
 					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
 					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#exampleModal">
@@ -169,7 +197,7 @@
 			<div class="col">
 				<h1>Youre LoggedIn!</h1>
 				<input type="text" bind:this={input}>
-				<button type="button" on:click={enterQueue}>Enter</button>
+				<button type="button" on:click={enterQueueINPUT}>Enter</button>
 			</div>
 		</div>
 	</section>
