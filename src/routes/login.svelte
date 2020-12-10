@@ -2,7 +2,7 @@
 	import { goto } from '@sapper/app';
 	import { userStore } from '../stores/userStore'
 
-	import { fade } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	
 	let fetchURL = "http://localhost:8081";
 	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
@@ -96,7 +96,7 @@
 </svelte:head>
 
 {#if newuser === 0}
-<section transition:fade class="container jumbotron">
+<section transition:slide class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -135,7 +135,7 @@
 	</div>
 </section>
 {:else}
-	<section transition:fade class="container jumbotron">
+	<section transition:slide class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -148,13 +148,13 @@
 					<form on:submit|preventDefault={createuser}>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 							</div>
 							<input type="email" name="" class="form-control input_email" bind:value={useremail} placeholder="E-mail" required>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
 							<input type="text" name="" class="form-control input_pass" bind:value={username} placeholder="Usuário" required>
 						</div>
@@ -166,7 +166,7 @@
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							<input type="password" name="" class="form-control input_user" bind:value={passwordconfirm} placeholder="Confirmar senha" required>
 						</div>
@@ -189,6 +189,9 @@
 
 
 <style>
+	section{
+		max-height: 90vh;
+	}
 	.user_card {
 			height: 400px;
 			width: 350px;
@@ -223,7 +226,7 @@
 		}
 		.login_btn {
 			width: 100%;
-			background: #3a2bc0 !important;
+			background: #281d19 !important;
 			color: white !important;
 		}
 		.login_btn:focus {
@@ -234,7 +237,7 @@
 			padding: 0 2rem;
 		}
 		.input-group-text {
-			background: #3a2bc0 !important;
+			background: #281d19 !important;
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;

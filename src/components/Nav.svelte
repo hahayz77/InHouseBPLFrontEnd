@@ -6,15 +6,16 @@
 </script>
 
 
-<nav class="navbar navbar-expand-lg">
-	<a class="navbar-brand" href="/">Pobre League</a>
+<nav class="navbar navbar-expand-lg bg-white">
+	<a class="navbar-brand" href="/"><img src="battleritebrlogo.png" alt="Battlerite Brasil"></a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
   	</button>
  	 <div class="collapse navbar-collapse" id="navbarText">
 		<ul class="navbar-nav ml-auto">
 			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-			<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>	
+			<li><a aria-current="{segment === 'sobre' ? 'page' : undefined}" href="sobre">sobre</a></li>	
+			<li><a aria-current="{segment === 'builds' ? 'page' : undefined}" href="builds">builds</a></li>
 			{#if $userStore.name === 'none'}
 				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">login</a></li>
 			{:else}
@@ -31,6 +32,11 @@
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
+		max-height: 10vh;
+	}
+
+	nav a img{
+		max-height: 8vh;
 	}
 
 	ul {
@@ -60,14 +66,21 @@
 		content: '';
 		width: calc(100% - 1em);
 		height: 2px;
-		background-color: rgba(89, 0, 255, 0.3);
+		background-color: rgba(0, 0, 0, 0.3);
 		display: block;
-		bottom: -1px;
+		bottom: 10px;
 	}
 
 	a {
 		text-decoration: none;
 		padding: 1em 0.5em;
 		display: block;
+		color: #281d19;
+		font-family: Brickton Regular;
+		letter-spacing: 0.1rem;
+	}
+	@font-face {
+	    font-family: 'Brickton Regular';
+		src: local('Brickton Regular'), local('Brickton Regular'), url("./fonts/Brickton Regular") format('otf');
 	}
 </style>

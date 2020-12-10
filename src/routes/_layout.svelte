@@ -1,8 +1,9 @@
 <script>
 	import Nav from '../components/Nav.svelte';
+	import Footer from '../components/Footer.svelte';
 	import { onMount } from 'svelte';
 
-	import { fade } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	export let segment;
 	export let loadingPage = true;
@@ -16,7 +17,7 @@
 
 	{#if loadingPage}
 		<div class="background">
-			<img src="favicon.png" alt="adas">
+			<img src="battleritebr.png" alt="adas">
 		</div>
 	{/if}
 
@@ -25,9 +26,11 @@
 			<source src="video.webm" type="video/webm">
 		</video>
 	
-	<main transition:fade>
+	<main transition:slide class="overflow-hidden">
 		<slot></slot>
 	</main>
+
+	<Footer />
 
 <style>
 
@@ -51,10 +54,11 @@
 		right: 0;
 		top: 0; 
 		bottom: 0;
-		background-color: rgba(0, 0, 0, 0.8);
+		background-color: rgba(0, 0, 0, 0.99);
 		height: 100%;
 		width: 100%;
 		z-index: 9999999;
+		transform: scale(1.3)
 	}
 	video{
 		position: fixed;

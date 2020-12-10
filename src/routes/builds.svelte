@@ -11,11 +11,17 @@ let selectedRiteT = [];
 
 </script>
 
+<svelte:head>
+	<title>Cargas</title>
+</svelte:head>
+
 <section class="container">
     <div class="row">
         <div class="col">
        {#each champions as { src, alt, rites, riteT }, i }
-            <img class="champs" src="{src}" alt="{alt}" on:click={()=> {selectedRites = rites; selectedRiteT = riteT;}}>
+	   	<a href={""} data-toggle="modal" data-target="#exampleModal">
+		<img class="champs" src="{src}" alt="{alt}">
+		</a>            
         {/each}
        </div>
        <div class="col-12">
@@ -26,6 +32,22 @@ let selectedRiteT = [];
        </div>
     </div>
 </section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{champions[0].alt}</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <style>
@@ -39,3 +61,6 @@ let selectedRiteT = [];
     } */
 
 </style>
+
+
+

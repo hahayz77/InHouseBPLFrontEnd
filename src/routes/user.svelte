@@ -34,9 +34,9 @@
 		if ($userStore.name !== "none"){
 			if($userStore.wins !== 0 || $userStore.loses !== 0){
 				winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
-			}
-			else{
-				winrate = "Sem partidas ainda..."
+				winrate = parseFloat(winrate.toFixed(1));
+			} else{
+				winrate = 0;
 			}
 			
 		}
@@ -166,70 +166,108 @@
 {#if error !== undefined}<Erro  error={error}/>{/if}
 
 
-<section transition:fade class="container jumbotron">
+<section class="container jumbotron">
 	<div class="row">
-		<div class="col-12 col-sm-6 px-3">
+		<div class="col-12 col-sm-6 col-md-6 px-3">
 			<div class="card">
-				<div class="card-header"><h2>{$userStore.name}</h2></div>
+				<div class="card-header"><h2>{$userStore.name} <a href="/user/config" class="float-right"><i class="fas fa-cog text-dark"></i></a></h2></div>
 				<div class="card-body">
-					<img class="d-block mr-auto rounded-pill" src="/champions/{$userStore.main}.jpg" alt="">
-					<h4>Pontos: {$userStore.points}</h4>
-					<h5>Main: {$userStore.main}</h5>
-					<h5>Vitórias: {$userStore.wins}</h5>
-					<h5>Derrotas: {$userStore.loses}</h5>
-					<h5>Winrate: {winrate}%</h5>
+					<img class="d-block mr-auto rounded-pill py-3" src="/champions/{$userStore.main}.jpg" alt="">
+					<h4><i class="fas fa-award"></i> Pontos: {$userStore.points}</h4>
+					<h5><i class="fas fa-heart"></i> Main: {$userStore.main}</h5>	
+					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
+					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
+					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
 					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
 					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
 					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#exampleModal">
-					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-12 col-sm-6 alignjustify-content-center">
+		<!-- <div class="col-12 col-sm-6 col-md-6 px-3">
+			<div class="card">
+				<div class="card-header"><h3>Ranking</h3></div>
+			</div>
+		</div> -->
+	</div>
+	<section class="container jumbotron">
+		<div class="row">
+			{#if queuePlayers == undefined}
+				<h2 class="text-center alert my-3">Carregando a fila...</h2>
+			{:else if queuePlayers == ""}
+				<h2 class="text-center alert my-3">Nenhum player aguardando</h2>
+			{:else}
+				<ul class="list-group col-12 col-sm-10 col-md-8 mx-auto">
+					{#each queuePlayers as player, id}
+						<li class='text-center list-group-item list-item-{id%2 === 0 ? "primary" : "secondary"}'><h4>{player.name}</h4></li>			
+					{/each}
+				</ul>
+			{/if}
+		</div>
+	</section>
+	<div class="row">
+		{#if $matchesStore === undefined}
+			<h2 class="text-center alert my-3">Carregando partidas...</h2>
+		{:else if $matchesStore == ''}
+			<h2 class="text-center alert my-3">Nenhuma partida em adamento!</h2>
+		{:else}
+			<Matches />
+		{/if}
+	</div>
+</section>
+
+		<div>
 			<Report />
 		</div>
 
-</section>
 
-
-	<section transition:fade class="container jumbotron">
-		
+	<section class="container jumbotron">	
 		<div class="row">
 			<div class="col">
 				<h1>Youre LoggedIn!</h1>
 				<input type="text" bind:this={input}>
 				<button type="button" on:click={enterQueueINPUT}>Enter</button>
-			</div>
-		</div>
+			</div>			
 	</section>
-	
-	{#if queuePlayers == undefined}
-		<h2 style="color: white">Carregando a fila...</h2>
-	{:else if queuePlayers == ""}
-		<h2 style="color: white">Nenhum player aguardando</h2>
-	{:else}
-		{#each queuePlayers as player, id}
-				<div class="item">
-					<h3 style="color: white">{player.name} --- {player.time}</h3>
-					
-				</div>
-			{/each}
-	{/if}
-	
-
-	{#if $matchesStore === undefined}
-		<h2 style="color: white">Carregando partidas...</h2>
-	{:else if $matchesStore == ''}
-		<h2 style="color: white">Nenhuma partida em adamento!</h2>
-	{:else}
-		<Matches />
-	{/if}
 
 
 <style>
+	img{
+		max-width: 100%;
+	}
 	.card{
 		background-color: transparent ;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border-radius: 10px;
+	}
+	.card-body{
+		padding: auto 2rem;
 	}
 	.btn{
 		border-radius: 25px;
+		margin-top: 0.8rem;
+		margin-bottom: 0.8rem;
+	}
+	.list-item-primary{
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 10px;
+	}
+	.list-item-secondary{
+		background: rgba(0, 0, 0, 0.1);
+		border-radius: 10px;
+	}
+	.list-group{
+		padding: 1rem;
+		margin-bottom: 1rem;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border-radius: 10px;
+	}
+	.list-group-item{
+		padding: 0.5rem 1rem;
+		border: none;
 	}
 </style>

@@ -9,10 +9,21 @@
   let statusresponse;
   let fetchURL = "http://localhost:8081";
 
+
   async function report(userValue, reportValue) {
     try {
       if (problem !== "Nenhum problema") {
-        alert(problem);
+        const fetchUpdate = await fetch(fetchURL + "/match/problem/" + $userStore.name )
+        const result = await fetchUpdate.json();
+
+        if (result.status !== undefined) {
+          statusresponse = result.mensagem;
+          await setTimeout(() => { statusresponse = undefined }, 3000)
+        }
+        update();
+        $reportStore.preresult.teama = '';
+        $reportStore.preresult.teamb = ''; 
+
       } else if (teamA === "5" && teamB === "5") {
         alert("Erro nos dados! Apenas um time pode vencer 5 rounds!");
       } else if (teamA === "0" && teamB === "0") {
@@ -37,7 +48,7 @@
           })
         })
         const result = await fetchMatch.json();
-        console.log(result)
+
         if (result.status !== undefined) {
           statusresponse = result.mensagem;
           await setTimeout(() => { statusresponse = undefined }, 3000)
@@ -46,7 +57,7 @@
         $reportStore.preresult.teama = '';
         $reportStore.preresult.teamb = '';  
       }
-      // Fetch Update para que todos recebam Update da partida neste logal em conflito com result.update
+      // Fetch Update para que todos recebam Update da partida neste local em conflito com result.update
       return;
     } catch (error) {
       throw { error };
