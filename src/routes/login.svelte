@@ -69,13 +69,13 @@
 			alert("Passwords não conferem")
 		}
 		else{
-			Replace(username, " ","");
+			let newUsername = username.replace(/\s/g,"");
 			try {
 				loginIcon = true;
 				const login = await fetch(fetchURL + '/user/register', {
 					method: 'POST',
 					headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-					body: JSON.stringify({email: useremail, name: username, password: password})
+					body: JSON.stringify({email: useremail, name: newUsername, password: password})
 				})
 				const result = await login.json();
 				console.log(result);
