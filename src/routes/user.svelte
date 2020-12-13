@@ -9,6 +9,7 @@
 	import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
+	import { rankingStore } from '../stores/rankingStore';
 
 	import Matches from '../components/Matches.svelte';
 	import Report from '../components/Report.svelte';
@@ -26,19 +27,23 @@
 	let reportMatch, reportResult;
 	let reportRes;
 	let winrate;
+	let rankingUsers = [];
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
 			window.location.replace("http://localhost:3000/login")
 		}
-		if ($userStore.name !== "none"){
-			if($userStore.wins !== 0 || $userStore.loses !== 0){
-				winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
-				winrate = parseFloat(winrate.toFixed(1));
-			} else{
-				winrate = 0;
-			}
+		else{
+			ranking();
+			if ($userStore.name !== "none"){
+				if($userStore.wins !== 0 || $userStore.loses !== 0){
+					winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
+					winrate = parseFloat(winrate.toFixed(1));
+				} else{
+					winrate = 0;
+				}
 			
+			}
 		}
 	})
 
@@ -47,7 +52,8 @@
       const fetchUpdate = await fetch(fetchURL + "/match/update/" + $userStore.name )
       const result = await fetchUpdate.json();
       matchesStore.update(listaAtual => { return result.matches })
-      userStore.update(listaAtual => { return result.user })
+	  userStore.update(listaAtual => { return result.user })
+	  ranking();
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +144,7 @@
 	async function clickReport(){
 		var response = await fetch(fetchURL + '/match/report/'+ $userStore.name);
 		reportRes = await response.json();
-		console.log(reportRes);
+
 		if(reportRes.id !== undefined){
 			reportStore.update(()=>{ return reportRes })
 		}
@@ -148,6 +154,16 @@
 		return;
 	}
 	
+	  // ####################################### RANKING
+
+	  async function ranking(){
+		const fetchRanking = await fetch(fetchURL + "/user/ranking/")
+		const result = await fetchRanking.json();
+
+		rankingStore.update(listaAtual => { return result })
+		rankingUsers = $rankingStore;
+		return;
+	  }
 
 	  // ########################################   ERROR
 	  
@@ -169,7 +185,7 @@
 <section class="container jumbotron">
 	<div class="row">
 		<div class="col-12 col-sm-6 col-md-6 px-3">
-			<div class="card">
+			<div class="card user">
 				<div class="card-header"><h2>{$userStore.name} <a href="/user/config" class="float-right"><i class="fas fa-cog text-dark"></i></a></h2></div>
 				<div class="card-body">
 					<img class="d-block mr-auto rounded-pill py-3" src="/champions/{$userStore.main}.jpg" alt="">
@@ -184,11 +200,21 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="col-12 col-sm-6 col-md-6 px-3">
-			<div class="card">
+		<div class="col-12 col-sm-6 col-md-6 px-3">
+			<div class="card ranking">
 				<div class="card-header"><h3>Ranking</h3></div>
+				<div class="card-body">
+					{#each rankingUsers as {name, main, points}, id}
+					<div class="item-ranking">
+						<span>{id+1}</span>
+						<img src="/champions/{main}.jpg" alt="{main}" class=" mx-auto rounded-pill">
+						<span>{name}</span>
+						<span class="float-right">{points}</span>
+					</div>
+					{/each}
+				</div>
 			</div>
-		</div> -->
+		</div>
 	</div>
 	<section class="container jumbotron">
 		<div class="row">
@@ -269,5 +295,18 @@
 	.list-group-item{
 		padding: 0.5rem 1rem;
 		border: none;
+	}
+	.ranking, .user{
+		max-height: 90vh;
+	}
+	.ranking .card-body{
+		overflow: auto;
+	}
+	.item-ranking{
+		margin: 1rem auto;
+		font-size: 18px;
+	}
+	.item-ranking img{
+		height: 50px;
 	}
 </style>
