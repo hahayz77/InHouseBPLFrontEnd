@@ -249,16 +249,6 @@
 		</div>
 
 
-	<section class="container jumbotron">	
-		<div class="row">
-			<div class="col">
-				<h1>Youre LoggedIn!</h1>
-				<input type="text" bind:this={input}>
-				<button type="button" on:click={enterQueueINPUT}>Enter</button>
-			</div>			
-	</section>
-
-
 <style>
 	img{
 		max-width: 100%;
