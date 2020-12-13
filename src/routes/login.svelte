@@ -69,6 +69,7 @@
 			alert("Passwords não conferem")
 		}
 		else{
+			Replace(username, " ","");
 			try {
 				loginIcon = true;
 				const login = await fetch(fetchURL + '/user/register', {
