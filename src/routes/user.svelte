@@ -15,12 +15,14 @@
 	import Report from '../components/Report.svelte';
 	import Erro from '../components/Erro.svelte';
 
+	const PORT = "https://app-inhouseleagueblp.herokuapp.com";
+	// const PORT = "http://localhost:8081/";
 
-	const socket = io("http://localhost:8081/", {
+	const socket = io(PORT, {
 		transports: ['websocket']
 	})		
 
-	let fetchURL = "http://localhost:8081";
+	let fetchURL = PORT;
 	let error, status;
 	let input = '';
 	let queuePlayers;
@@ -31,7 +33,7 @@
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-			window.location.replace("http://localhost:3000/login")
+			window.location.replace( fetchURL+ "/login")
 		}
 		else{
 			ranking();
