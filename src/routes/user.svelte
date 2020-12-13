@@ -33,7 +33,7 @@
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-			window.location.replace( fetchURL+ "/login")
+			window.location.replace( "https://battleritebrasil.netlify.app"+ "/login")
 		}
 		else{
 			ranking();
