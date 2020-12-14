@@ -83,11 +83,11 @@
 {/if}
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reportar Resultado</h5>
+        <h5 class="modal-title" id="reportModalLabel">Reportar Resultado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -141,8 +141,8 @@
         </form>
       </div>
       <div class="modal-footer">
-      <p>Time A: {$reportStore.preresult.teama}</p>
-      <p>Time B: {$reportStore.preresult.teamb}</p>
+      <p>Time A: {$reportStore.preresult.teama[0] + " x " + $reportStore.preresult.teama[1]}</p>
+      <p>Time B: {$reportStore.preresult.teamb[0] + " x " + $reportStore.preresult.teamb[1]}</p>
       </div>
      {/if}
     </div>

@@ -2,17 +2,23 @@
     import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
-	import { rankingStore } from '../stores/rankingStore';
+    import { rankingStore } from '../stores/rankingStore';
 
     let main;
     let statusresponse;
     let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
+
     async function mainChar(){
-        const fetchUpdate = await fetch( fetchURL + "/user/main/" + $userStore._id + "/" + main)
+        const fetchUpdate = await fetch( fetchURL + "/user/main/" + $userStore.id + "/" + main)
         const result = await fetchUpdate.json();
-        statusresponse = result.mensagem;
-        await setTimeout(() => { statusresponse = undefined }, 3000)
+        statusresponse = result.status;
+        if(statusresponse === "mainchampionok"){
+            $userStore.main = main;
+        }
+        else{
+            alert(error);
+        }
     }
     async function logOff(){
         let selected = confirm("Tem certeza que deseja sair?");
@@ -57,8 +63,8 @@
             <option value="Sirius">Sirius</option>
             <option value="Taya">Taya</option>
             <option value="Thorn">Thorn</option>
-            <option value="Ulric">Blossom</option>
-            <option value="Varesh">Croak</option>
+            <option value="Ulric">Ulric</option>
+            <option value="Varesh">Varesh</option>
             <option value="Zander">Zander</option>
         </select>
       </div>

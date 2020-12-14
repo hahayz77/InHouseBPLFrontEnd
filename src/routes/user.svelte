@@ -200,7 +200,7 @@
 					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
 					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
 					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
-					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#exampleModal">
+					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#reportModal">
 				</div>
 			</div>
 		</div>
@@ -270,7 +270,7 @@
 			<Report />
 		</div>
 		<div>
-			<Config />
+			<Config ranking={rankingUsers}/>
 		</div>
 
 
