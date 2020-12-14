@@ -14,6 +14,7 @@
 	import Matches from '../components/Matches.svelte';
 	import Report from '../components/Report.svelte';
 	import Erro from '../components/Erro.svelte';
+	import Config from '../components/Config.svelte';
 
 	const PORT = "https://app-inhouseleagueblp.herokuapp.com";
 	// const PORT = "http://localhost:8081/";
@@ -33,7 +34,8 @@
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-			window.location.replace( "https://battleritebrasil.netlify.app"+ "/login")
+			// window.location.replace("https://battleritebrasil.netlify.app"+ "/login")
+			window.location.replace("http://localhost:3000"+ "/login");
 		}
 		else{
 			ranking();
@@ -186,9 +188,9 @@
 
 <section class="container jumbotron">
 	<div class="row">
-		<div class="col-12 col-sm-6 col-md-6 px-3">
-			<div class="card user">
-				<div class="card-header"><h2>{$userStore.name} <a href="/user/config" class="float-right"><i class="fas fa-cog text-dark"></i></a></h2></div>
+		<div class="col-12 col-sm-6 col-md-6 px-3 user">
+			<div class="card">
+				<div class="card-header"><h2>{$userStore.name} <a href={""} data-toggle="modal" data-target="#ModalConfig" class="float-right"><i class="fas fa-cog text-dark"></i></a></h2></div>
 				<div class="card-body">
 					<img class="d-block mr-auto rounded-pill py-3" src="/champions/{$userStore.main}.jpg" alt="">
 					<h4><i class="fas fa-award"></i> Pontos: {$userStore.points}</h4>
@@ -202,16 +204,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12 col-sm-6 col-md-6 px-3">
-			<div class="card ranking">
+		<div class="col-12 col-sm-6 col-md-6 px-3 ranking">
+			<div class="card">
 				<div class="card-header"><h3>Ranking</h3></div>
 				<div class="card-body">
 					{#each rankingUsers as {name, main, points}, id}
 					<div class="item-ranking">
-						<span>{id+1}</span>
-						<img src="/champions/{main}.jpg" alt="{main}" class=" mx-auto rounded-pill">
-						<span>{name}</span>
-						<span class="float-right">{points}</span>
+						<span class="rank">{id+1}</span>
+						<img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
+						<span class="name">{name}</span>
+						<span class="points float-right">{points}</span>
 					</div>
 					{/each}
 				</div>
@@ -220,32 +222,55 @@
 	</div>
 	<section class="container jumbotron">
 		<div class="row">
-			{#if queuePlayers == undefined}
-				<h2 class="text-center alert my-3">Carregando a fila...</h2>
-			{:else if queuePlayers == ""}
-				<h2 class="text-center alert my-3">Nenhum player aguardando</h2>
-			{:else}
-				<ul class="list-group col-12 col-sm-10 col-md-8 mx-auto">
-					{#each queuePlayers as player, id}
-						<li class='text-center list-group-item list-item-{id%2 === 0 ? "primary" : "secondary"}'><h4>{player.name}</h4></li>			
-					{/each}
-				</ul>
-			{/if}
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3>Fila</h3>
+					</div>
+					<div class="card-body">
+						{#if queuePlayers == undefined}
+							<h4 class="text-center alert my-3">Carregando fila...</h4>
+						{:else if queuePlayers == ""}
+							<h4 class="text-center alert my-3">Nenhum player aguardando na fila!</h4>
+						{:else}
+							<ul class="list-group col-12 col-sm-10 col-md-8 mx-auto">
+								{#each queuePlayers as player, id}
+									<li class='text-center list-group-item list-item-{id%2 === 0 ? "primary" : "secondary"}'><h4>{player.name}</h4></li>			
+								{/each}
+							</ul>
+						{/if}
+					</div>
+				</div>	
+			</div>
 		</div>
 	</section>
-	<div class="row">
-		{#if $matchesStore === undefined}
-			<h2 class="text-center alert my-3">Carregando partidas...</h2>
-		{:else if $matchesStore == ''}
-			<h2 class="text-center alert my-3">Nenhuma partida em adamento!</h2>
-		{:else}
-			<Matches />
-		{/if}
-	</div>
+	<section class="container jumbotron">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3>Partidas</h3>
+					</div>
+					<div class="card-body">
+						{#if $matchesStore === undefined}
+							<h4 class="text-center alert my-3">Carregando partidas...</h4>
+						{:else if $matchesStore == ''}
+							<h4 class="text-center alert my-3">Nenhuma partida em adamento!</h4>
+						{:else}
+							<Matches />
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </section>
 
 		<div>
 			<Report />
+		</div>
+		<div>
+			<Config />
 		</div>
 
 
@@ -288,10 +313,8 @@
 		padding: 0.5rem 1rem;
 		border: none;
 	}
-	.ranking, .user{
-		max-height: 90vh;
-	}
-	.ranking .card-body{
+	.ranking .card .card-body{
+		max-height: 80vh;
 		overflow: auto;
 	}
 	.item-ranking{
@@ -301,4 +324,25 @@
 	.item-ranking img{
 		height: 50px;
 	}
+
+	@media (max-width: 767.98px) { 
+		.ranking, .user{
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+		}
+		.item-ranking .name{
+			font-size: 16px;
+		}
+		.item-ranking img{
+			height: 35px;
+		}
+		.item-ranking .points{
+			line-height: 2;
+		}
+		.col-12{
+			padding-right: 0;
+			padding-left: 0;
+		}
+	}
+
 </style>

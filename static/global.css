@@ -1,6 +1,31 @@
 .jumbotron{
 	background: none;
+	margin-bottom: 0;
 }
 p{
 	font-size: 18px;
+}
+
+@media (max-width: 576px) { 
+	.a{
+		padding: 0;
+	}
+	h1{
+		font-size: 2rem;
+	}
+	h2{
+		font-size: 1.8rem;
+	}
+	h3{
+		font-size: 1.4rem;
+	}
+	h4{
+		font-size: 1.2rem;
+	}
+	h5{
+		font-size: 1rem;
+	}
+	p{
+		font-size: 15px;
+	}
 }
