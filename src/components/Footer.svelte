@@ -24,7 +24,7 @@
     img{
         max-height: 80px;
         position: relative;
-        bottom: 0;
+        bottom: -1px;
         max-width: 20%;
 
     }
