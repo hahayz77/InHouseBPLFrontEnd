@@ -4,7 +4,7 @@
   import { matchesStore } from "../stores/matchesStore";
   import Status from "../components/Status.svelte";
 
-  export let myteam = "1";
+  // export let myteam = "1";
   let teamA, teamB, problem, team;
   let response;
   let statusresponse;
