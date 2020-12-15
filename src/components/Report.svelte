@@ -4,6 +4,7 @@
   import { matchesStore } from "../stores/matchesStore";
   import Status from "../components/Status.svelte";
 
+  export let myteam = "1";
   let teamA, teamB, problem, team;
   let response;
   let statusresponse;
@@ -126,23 +127,26 @@
             </div>
           </div>
           <div class="row">
-            <h5 class="mt-3">Reportar Problema</h5>
-            <select bind:value={problem} class="form-control bg-warning mb-4">
-              <option>Nenhum problema</option>
-              <option>Player inativo</option>
-              <option>Cancelar partida</option>
-              <option>Outro problema</option>
-            </select>
-            <input
-              type="submit"
-              class="btn btn-success"
-              value="Enviar Resultado" />
+            <div class="col-12 mx-auto">
+              <h5 class="mt-3">Reportar Problema</h5>
+              <select bind:value={problem} class="form-control bg-warning mb-4">
+                <option>Nenhum problema</option>
+                <option>Player inativo</option>
+                <option>Cancelar partida</option>
+                <option>Outro problema</option>
+              </select>
+              <input type="submit" class="btn btn-success" value="Enviar Resultado"/>
+            </div>
           </div>
         </form>
       </div>
+       <div class="modal-footer">
+        <p>Seu time é o time {myteam} </p>
+      </div>
       <div class="modal-footer">
-      <p>Time A: {$reportStore.preresult.teama[0] + " x " + $reportStore.preresult.teama[1]}</p>
-      <p>Time B: {$reportStore.preresult.teamb[0] + " x " + $reportStore.preresult.teamb[1]}</p>
+        <p>Resultados Reportados -> </p>
+        <p>Time 1 ({$reportStore.preresult.teama[0] + " x " + $reportStore.preresult.teama[1]})</p>
+        <p>Time 2 ({$reportStore.preresult.teamb[0] + " x " + $reportStore.preresult.teamb[1]})</p>
       </div>
      {/if}
     </div>
