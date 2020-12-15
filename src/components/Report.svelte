@@ -140,9 +140,9 @@
           </div>
         </form>
       </div>
-       <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <p>Seu time é o time {myteam} </p>
-      </div>
+      </div> -->
       <div class="modal-footer">
         <p>Resultados Reportados -> </p>
         <p>Time 1 ({$reportStore.preresult.teama[0] + " x " + $reportStore.preresult.teama[1]})</p>
