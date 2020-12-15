@@ -1,7 +1,11 @@
 .jumbotron{
-	background: none;
-	margin-bottom: 0;
+    background-color: transparent;  
+    margin-bottom: 0;  
 }
+.container-fluid{
+    padding: 0;
+}
+
 p{
 	font-size: 18px;
 }

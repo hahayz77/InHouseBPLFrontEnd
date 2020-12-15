@@ -1,12 +1,28 @@
 <script>
-    import { matchesStore } from '../stores/matchesStore';
+  import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
-    import { rankingStore } from '../stores/rankingStore';
+  import { rankingStore } from '../stores/rankingStore';
 
     let main;
     let statusresponse;
     let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+    
+    let offUser = {
+      menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0
+    }
+
+    let offReport = {
+    status: "",
+    mensagem: "",
+    id: "",
+    teams: [0,0,0,0,0,0],
+    reported: "",
+    preresult: {
+        teama: "",
+        teamb: ""
+    } 
+}
 
 
     async function mainChar(){
@@ -22,7 +38,13 @@
     }
     async function logOff(){
         let selected = confirm("Tem certeza que deseja sair?");
-        alert(selected);
+        if(selected === true){
+          userStore.update(listaAtual => { return offUser });
+          reportStore.update(listaAtual => { return offReport });
+          matchesStore.update(listaAtual => {return undefined});
+          rankingStore.update(listaAtual => {return undefined});
+          window.location.replace("https://battleritebrasil.netlify.app"+ "/login");
+        }
     }
 </script>
 

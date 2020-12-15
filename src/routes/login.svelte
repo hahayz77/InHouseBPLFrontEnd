@@ -190,9 +190,6 @@
 
 
 <style>
-	section{
-		max-height: 90vh;
-	}
 	.user_card {
 			height: 400px;
 			width: 350px;

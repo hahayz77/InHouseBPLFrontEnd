@@ -30,7 +30,7 @@
     }
 
     a{
-        color: #281d19;
+        color: black;
     }
     .jumbotron{
         margin-bottom: 0;

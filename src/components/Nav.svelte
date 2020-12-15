@@ -6,7 +6,7 @@
 </script>
 
 
-<nav class="navbar navbar-expand-lg bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 	<a class="navbar-brand" href="/"><img src="battleritebrlogo.png" alt="Battlerite Brasil"></a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
@@ -32,11 +32,11 @@
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
-		max-height: 10vh;
+		height: 10vh;
 	}
 
 	nav a img{
-		max-height: 8vh;
+		height: 8vh;
 	}
 
 	ul {
@@ -82,5 +82,29 @@
 	@font-face {
 	    font-family: 'Brickton Regular';
 		src: local('Brickton Regular'), local('Brickton Regular'), url("./fonts/Brickton Regular") format('otf');
+	}
+	@media (max-width: 768px) {
+		nav a img{
+			height: 7vh;
+		}
+		.navbar{
+			padding: 0;
+		}
+		.navbar-brand{
+			padding: 0 1rem;
+		}
+		.navbar-toggler-icon{
+			color: black;
+		}
+		.navbar-toggler{
+			z-index: 99;
+		}
+		.navbar-light .navbar-toggler{
+			border-color: rgba(0,0,0,0);
+		}
+		.navbar-collapse{
+			background: white;
+			z-index: 16;
+		}
 	}
 </style>
