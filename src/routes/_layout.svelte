@@ -10,7 +10,7 @@
 
 	export let segment;
 	export let loadingPage = true;
-	export let localStoreUser;
+	export let localStoreUser = { menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0 };
 	let phone = false;
 
 	onMount(() => {
