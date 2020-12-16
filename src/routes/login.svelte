@@ -15,8 +15,10 @@
 	let newuser = 0;
 	let loginIcon = false;
 
+	if (process.browser) { 			
+		let localStoreUser = localStorage.getItem('userStore');			
+	}
 	if($userStore.id !== ""){
-		alert("Você já está logado!");
 		goto("/user");
 	}
 
@@ -41,9 +43,13 @@
 				body: JSON.stringify({name: username, password: password})
 			})
 			const result = await login.json();
-			console.log(result);
+
 			if(result.mensagem === "Logado com sucesso!"){
 				userStore.update(()=>{ return result });
+				// Local Store
+				let localStore = $userStore;
+				localStorage.setItem('userStore', JSON.stringify(localStore));
+
 				goto('/user');
 				loginIcon = false;
 				return;

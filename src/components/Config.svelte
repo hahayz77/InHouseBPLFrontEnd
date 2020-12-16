@@ -1,4 +1,6 @@
 <script>
+  import { goto } from '@sapper/app';
+
   import { matchesStore } from '../stores/matchesStore';
 	import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
@@ -43,7 +45,10 @@
           reportStore.update(listaAtual => { return offReport });
           matchesStore.update(listaAtual => {return undefined});
           rankingStore.update(listaAtual => {return undefined});
-          window.location.replace("https://battleritebrasil.netlify.app"+ "/login");
+          let localStore = offUser;
+          console.log(localStore);
+				  localStorage.setItem('userStore', JSON.stringify(localStore));
+          location.reload();
         }
     }
 </script>

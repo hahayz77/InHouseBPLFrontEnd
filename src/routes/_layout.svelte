@@ -2,15 +2,28 @@
 	import Nav from '../components/Nav.svelte';
 	import Footer from '../components/Footer.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '@sapper/app';
+
+	import { userStore } from '../stores/userStore';
 
 	import { slide } from 'svelte/transition';
 
 	export let segment;
 	export let loadingPage = true;
+	export let localStoreUser;
 	let phone = false;
 
 	onMount(() => {
 		setTimeout(() => { loadingPage = false }, 2000);
+
+		// Store Persistente
+		if (process.browser) { 
+			localStoreUser = localStorage.getItem('userStore');
+			userStore.update(()=>{ return JSON.parse(localStoreUser)});
+			if(segment === "login" && localStoreUser.id !== ""){
+				goto("/user");
+			}			
+  		}
 
 		function phoneCheck(){
 			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
@@ -19,6 +32,8 @@
 			else{
 			}
 		}
+
+
 	})
 </script>
 
