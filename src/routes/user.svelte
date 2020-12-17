@@ -32,12 +32,12 @@
 	let winrate;
 	let rankingUsers = [];
 
-	onMount(() => {
+	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
 			goto("/login");
 		}
 		else{
-			ranking();
+			await update();
 			if ($userStore.name !== "none"){
 				if($userStore.wins !== 0 || $userStore.loses !== 0){
 					winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
