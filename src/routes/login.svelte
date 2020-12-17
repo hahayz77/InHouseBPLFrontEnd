@@ -43,16 +43,10 @@
 				body: JSON.stringify({name: username, password: password})
 			})
 			const result = await login.json();
-<<<<<<< HEAD
-
-			if(result.mensagem === "Logado com sucesso!"){
-				userStore.update(()=>{ return result });
-=======
 			
 			if(result.mensagem === "Logado com sucesso!"){
 				userStore.update(()=>{ return result });
 
->>>>>>> Error1
 				// Local Store
 				let localStore = $userStore;
 				localStorage.setItem('userStore', JSON.stringify(localStore));

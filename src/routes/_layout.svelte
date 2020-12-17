@@ -5,44 +5,16 @@
 
 	import Nav from '../components/Nav.svelte';
 	import Footer from '../components/Footer.svelte';
-<<<<<<< HEAD
-	import { onMount } from 'svelte';
-	import { goto } from '@sapper/app';
-
-	import { userStore } from '../stores/userStore';
-=======
->>>>>>> Error1
 
 	import { userStore } from '../stores/userStore';
 
 	export let segment;
 	export let loadingPage = true;
-	export let localStoreUser = { menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0 };
+	
 	let phone = false;
 
 	onMount(async () => {
 		setTimeout(() => { loadingPage = false }, 2000);
-<<<<<<< HEAD
-
-		// Store Persistente
-		if (process.browser) { 
-			localStoreUser = localStorage.getItem('userStore');
-			userStore.update(()=>{ return JSON.parse(localStoreUser)});
-			if(segment === "login" && localStoreUser.id !== ""){
-				goto("/user");
-			}			
-  		}
-
-		function phoneCheck(){
-			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-				phone = true;
-			}
-			else{
-			}
-		}
-
-
-=======
 		
 		// Store Persistente
 		if (process.browser) { 
@@ -54,7 +26,6 @@
 				}
 			}			
   		}
->>>>>>> Error1
 	})
 </script>
 

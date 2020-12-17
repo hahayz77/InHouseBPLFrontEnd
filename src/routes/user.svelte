@@ -34,11 +34,7 @@
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-<<<<<<< HEAD
-			goto("/login")
-=======
 			goto("/login");
->>>>>>> Error1
 		}
 		else{
 			ranking();
