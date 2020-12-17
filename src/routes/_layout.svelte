@@ -1,24 +1,30 @@
 <script>
+	import { goto } from '@sapper/app';
+	import { onMount } from 'svelte';
+	import { slide } from 'svelte/transition';
+
 	import Nav from '../components/Nav.svelte';
 	import Footer from '../components/Footer.svelte';
-	import { onMount } from 'svelte';
 
-	import { slide } from 'svelte/transition';
+	import { userStore } from '../stores/userStore';
 
 	export let segment;
 	export let loadingPage = true;
 	let phone = false;
 
-	onMount(() => {
+	onMount(async () => {
 		setTimeout(() => { loadingPage = false }, 2000);
-
-		function phoneCheck(){
-			if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-				phone = true;
-			}
-			else{
-			}
-		}
+		
+		// Store Persistente
+		if (process.browser) { 
+			let localStoreUser = await localStorage.getItem('userStore');
+			if(localStoreUser !== null){
+				userStore.update(()=>{ return JSON.parse(localStoreUser)});
+				if(segment === "login"){
+					goto("/user");
+				}
+			}			
+  		}
 	})
 </script>
 
@@ -30,17 +36,10 @@
 		</div>
 	{/if}
 
-	{#if phone === false}
 	<div class="backgroundVideo"></div>
 		<video autoplay muted loop id="myVideo">
 			<source src="video.webm" type="video/webm">
 		</video>
-	{/if}
-
-	{#if phone === true}
-			<div class="backgroundImg"></div>
-				<img id="backgroundImg" src="background.png" alt="background">
-	{/if}
 	
 	<main transition:slide class="overflow-hidden">
 		<slot></slot>
@@ -89,25 +88,6 @@
 		
 	}
 	.backgroundVideo{
-		background: rgba(255, 255, 255, 0.7);
-		position: fixed;
-		left: 0; 
-		right: 0;
-		top: 0; 
-		bottom: 0;
-		height: 100%;
-		width: 100%;
-		z-index: -999999;
-	}
-	#backgroundImg{
-		position: fixed;
-		height: 100%;
-		width: 100%;
-		z-index: -9999999;
-		object-fit: cover;
-		transform: scale(2)
-	}
-	.backgroundImg{
 		background: rgba(255, 255, 255, 0.7);
 		position: fixed;
 		left: 0; 

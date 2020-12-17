@@ -34,8 +34,7 @@
 
 	onMount(() => {
 		if($userStore.id === '' || $userStore._id === ''){
-			window.location.replace("https://battleritebrasil.netlify.app"+ "/login")
-			// window.location.replace("http://localhost:3000"+ "/login");
+			goto("/login");
 		}
 		else{
 			ranking();
