@@ -45,9 +45,15 @@
           reportStore.update(listaAtual => { return offReport });
           matchesStore.update(listaAtual => {return undefined});
           rankingStore.update(listaAtual => {return undefined});
+<<<<<<< HEAD
           let localStore = offUser;
           console.log(localStore);
 				  localStorage.setItem('userStore', JSON.stringify(localStore));
+=======
+
+          localStorage.removeItem('userStore');
+
+>>>>>>> Error1
           location.reload();
         }
     }
