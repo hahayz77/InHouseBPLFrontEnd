@@ -100,7 +100,10 @@
         <form on:submit|preventDefault={() => {report($userStore, $reportStore)}} class="mx-auto">
           <div class="row">
             <div class="col-6">
-              <h5 class="card-title">Time A</h5>
+              <h5 class="card-title">Time 1</h5>
+              <p class="players">{$reportStore.teams[0]}</p>
+              <p class="players">{$reportStore.teams[1]}</p>
+              <p class="players">{$reportStore.teams[2]}</p>
               <select
                 bind:value={teamA}
                 class="form-control bg-primary text-light">
@@ -113,7 +116,10 @@
               </select>
             </div>
             <div class="col-6">
-              <h5 class="card-title">Time B</h5>
+              <h5 class="card-title">Time 2</h5>
+              <p class="players">{$reportStore.teams[3]}</p>
+              <p class="players">{$reportStore.teams[4]}</p>
+              <p class="players">{$reportStore.teams[5]}</p>
               <select
                 bind:value={teamB}
                 class="form-control bg-danger text-light">
@@ -152,3 +158,15 @@
     </div>
   </div>
 </div>
+
+<style>
+    .players{
+      font-size: 16px;
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+      margin-bottom: 5px;
+      overflow: hidden;
+      border: 1px solid #8080802e;
+    }
+    
+</style>
