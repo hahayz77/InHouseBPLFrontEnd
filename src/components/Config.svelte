@@ -26,12 +26,9 @@
     } 
 }
 
-
     async function mainChar(){
         let userId =  await $userStore._id;
-        console.log(userId);
         const fetchUpdate = await fetch( fetchURL + "/user/main/" + userId + "/" + main)
-        console.log(userId);
         const result = await fetchUpdate.json();
         statusresponse = result.status;
         if(statusresponse === "mainchampionok"){
