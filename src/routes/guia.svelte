@@ -5,7 +5,7 @@
 <section class="container jumbotron">
 	<div class="row">
 		<div class="col">
-			<div class="container jumbotron">
+			<div class="jumbotron">
 				<h1 class="text-center">Guia InHouse Reborn</h1>
 			</div>
 			<div class="accordion" id="accordionExample">

@@ -30,7 +30,7 @@
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
+		border-bottom: 0px;
 		font-weight: 300;
 		padding: 0 1em;
 		height: 10vh;
@@ -76,7 +76,7 @@
 		text-decoration: none;
 		padding: 1em 0.5em;
 		display: block;
-		color: #281d19;
+		color: black;
 		font-family: "Brickton Regular";
 		letter-spacing: 0.1rem;
 	}

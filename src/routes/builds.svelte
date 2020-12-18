@@ -12,10 +12,20 @@ let selectedRiteT = [];
 </script>
 
 <svelte:head>
-	<title>Cargas</title>
+	<title>Builds</title>
 </svelte:head>
 
-<section class="container">
+<section class="container jumbotron">
+    <div class="row">
+        <div class="col-12">
+          <div class="jumbotron">
+            <h1 class="text-center">Em construção....</h1>
+          </div>
+        </div>
+    </div>
+</section>
+
+<!-- <section class="container">
     <div class="row">
         <div class="col">
        {#each champions as { src, alt, rites, riteT }, i }
@@ -47,15 +57,18 @@ let selectedRiteT = [];
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <style>
-    img, .champs{
+    section{
+      height: 70vh;
+    }
+    /* img, .champs{
         height: 100px;
         width: auto;
         padding: 10px;
-    }
+    } */
     /* img, .champs :hover{
         transform: scale(1.2);
     } */

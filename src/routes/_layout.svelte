@@ -89,7 +89,7 @@
 		
 	}
 	.backgroundVideo{
-		background: rgba(255, 255, 255, 0.7);
+		background: rgba(255, 255, 255, 0.85);
 		position: fixed;
 		left: 0; 
 		right: 0;
