@@ -6,7 +6,7 @@
 	import { reportStore } from '../stores/reportStore';
   import { rankingStore } from '../stores/rankingStore';
 
-    let main;
+    let main = "Jade";
     let statusresponse;
     let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
     

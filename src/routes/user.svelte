@@ -122,25 +122,8 @@
 		}
 	}
 
-	async function enterQueueINPUT(){
-		await update();
-		if ($matchesStore[0] === undefined){
-			socket.emit('queueUpdate', {name: input.value});
-		}
-		else{
-			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
-			if( letQueue === -1){
-				socket.emit('queueUpdate', {name: input.value})
-			}
-			else{
-			error = "Você tem uma partida para finalizar!";
-			await setTimeout(() => {error = undefined}, 3000);
-			}
-		}
-	}
-
-		async function outQueue(){
-				socket.emit('queueDelete', $userStore.id || $userStore._id);
+	async function outQueue(){
+		socket.emit('queueDelete', $userStore.id || $userStore._id);
 	}
 
 	// ########################################   REPORT
@@ -176,6 +159,7 @@
 		await setTimeout(()=>{ error = undefined }, 3000);
 		return;
 	})
+	
 </script>
 
 <svelte:head>
