@@ -14,7 +14,7 @@
 			<p>
 			- Lreo "O Sapo Cyberpunk"<br>
 			- Yasuda "O Jumong Japonês"<br>
-			- ThiTsu "O Oldur das Japonês"<br>
+			- ThiTsu "O Oldur Japonês"<br>
 			- Ivanbi "O Poloma do Whatsapp"<br>
 			- Fuzarker "O Coach Freya"<br>
 			- Dward0 "O Melhor Streamer de Battlerite de Todos os Tempos"<br>

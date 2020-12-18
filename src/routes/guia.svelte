@@ -134,10 +134,11 @@
 
 						<br><b>Se duas ou mais pessoas reportarem?</b><br>
 						Apenas o ultimo valor reportado será válido. <br>
+						Bem abaixo, na janela de Reportar Resultado, estarão os resultados já reportados por cada time. <br>
 
 						<br><b>Problemas antes ou durante a partida</b><br>
-						Caso haja algum problema você pode cancelar toda a partida escolhendo a opção "Reportar Problema" em amarelo. Lembrando que esta opção exclui a partida por completo sem nenhuma punição para os participantes. <br>
-						Apenas com o uso inadequado o player responsável pelo reporte poderá ser prejudicado.
+						Caso haja algum problema você pode cancelar toda a partida escolhendo a opção em amarelo na área "Reportar Problema". Lembrando que esta opção exclui a partida por completo sem nenhuma punição para os participantes. <br>
+						Com o uso inadequado do cancelamento das partidas o player responsável poderá ser banido.<br>
 						</div>
 					</div>
 				</div>
