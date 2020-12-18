@@ -15,6 +15,7 @@
 		<ul class="navbar-nav ml-auto">
 			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
 			<li><a aria-current="{segment === 'sobre' ? 'page' : undefined}" href="sobre">sobre</a></li>	
+			<li><a aria-current="{segment === 'guia' ? 'page' : undefined}" href="guia">guia</a></li>	
 			<li><a aria-current="{segment === 'builds' ? 'page' : undefined}" href="builds">builds</a></li>
 			{#if $userStore.name === 'none'}
 				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">login</a></li>
@@ -76,12 +77,8 @@
 		padding: 1em 0.5em;
 		display: block;
 		color: #281d19;
-		font-family: Brickton Regular;
+		font-family: "Brickton Regular";
 		letter-spacing: 0.1rem;
-	}
-	@font-face {
-	    font-family: 'Brickton Regular';
-		src: local('Brickton Regular'), local('Brickton Regular'), url("./fonts/Brickton Regular") format('otf');
 	}
 	@media (max-width: 768px) {
 		nav a img{
