@@ -58,10 +58,10 @@
 							As partidas precisam seguir o padrão de configurações atual mas com 5 rounds para vencer a partida (BO9). <br>
 							Qualquer diferença na configuração da sala que não estiver de acordo com o padrão poderá ser <a href={""} data-toggle="collapse" data-target="#collapse4">reportado</a> e pode gerar punição para os envolvidos. <br>
 							
-							<br><b>Configurações da Sala Custom</b><br>
+							<br><b>Configurações da sala custom</b><br>
 							Crie uma sala privada na aba custom do jogo e procure a opção para resetar configurações e só então configure para 5 rounds. <br>
 							
-							<br><b>Configurar Main</b><br>
+							<br><b>Configurar main</b><br>
 							Na sessão do <a href="user">Usuário</a>, na aba onde aparecerá o seu nick, clique em <i class="fas fa-cog text-dark"></i> para selecionar o seu main. <br>
 							Quando o ranking for atualizado novamente o seu main será atualizado para todos. <br>
 
