@@ -55,17 +55,24 @@
 					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
 						<div class="card-body">
 							<b>Regras da partida</b><br>
-							As partidas precisão seguir o padrão de configurações atual mas com de 5 rounds necessários para vencer a partida (BO9). <br>
-							Qualquer diferença na configuração da sala que não estiver de acordo com o padrão poderá ser <a href={""} data-toggle="collapse" data-target="#collapse4">reportado</a> e gerar punição para os envolvidos. <br>
+							As partidas precisam seguir o padrão de configurações atual mas com 5 rounds para vencer a partida (BO9). <br>
+							Qualquer diferença na configuração da sala que não estiver de acordo com o padrão poderá ser <a href={""} data-toggle="collapse" data-target="#collapse4">reportado</a> e pode gerar punição para os envolvidos. <br>
 							
-							<br><b>Alterar configurações</b><br>
+							<br><b>Configurações da Sala Custom</b><br>
 							Crie uma sala privada na aba custom do jogo e procure a opção para resetar configurações e só então configure para 5 rounds. <br>
 							
+							<br><b>Configurar Main</b><br>
+							Na sessão do <a href="user">Usuário</a>, na aba onde aparecerá o seu nick, clique em <i class="fas fa-cog text-dark"></i> para selecionar o seu main. <br>
+							Quando o ranking for atualizado novamente o seu main será atualizado para todos. <br>
+
 							<br><b>Sobre pontuação no ranking</b><br>
-							A cada round vencido você ganha 1 ponto e a cada round perdido você perderá 1 ponto. <br>
-							Ou seja, 5 a 3 resultará em +2 pontos para os players vencedores e -2 pontos aos que perderam. <br>
+							A cada round que você vencer ganhará 1 ponto e a cada round que você perder será subtraído 1 ponto. <br>
+							Ou seja, 5 a 3 resultará em +2 pontos para os players vencedores e -2 pontos aos que perderam a partida. <br>
 							Ao passo que, 5 a 0 resultará em +5 pontos para os vencedores e -5 para os que perderam. <br>
 							
+							<br><b>Logout</b><br>
+							Clicando em <i class="fas fa-cog text-dark"></i> e logo em seguida no botão <button type="button" class="btn btn-danger">Log Out</button> <br>
+
 						</div>
 					</div>
 				</div>
@@ -101,8 +108,8 @@
 					<div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordionExample">
 						<div class="card-body">
 						<b>Partida finalizada com sucesso</b><br>
-						Quando a partida for finalizada deverá ser reportada no botão amarelo <input type="button" class="btn btn-warning" value="Reportar resultado"><br>
-						Um jogador de cada time deve reportar o resultado final selecionando a quantidade de rounds vencidos por cada time.<br>
+						Quando a partida for finalizada clique no botão amarelo <input type="button" class="btn btn-warning" value="Reportar resultado"> para abrir a janela de "Reportar Resultado". <br>
+						Então, um jogador de cada time deve reportar o resultado final selecionando a quantidade de rounds vencidos por cada time.<br>
 						<b>Time 1 </b>
 						<select class="form-control bg-primary inputResult text-light">
 							<option>0</option>
@@ -124,13 +131,15 @@
 						<br>
 						<br><b>Após informar o resultado...</b><br>
 						Confirme o resultado clicando no botão <input type="button" class="btn btn-success" value="Enviar Resultado"/> <br>
+						Aguarde o reporte do outro time. <br>
+						Se os dois valores reportados estiverem corretos então o reporte será finalizado com sucesso e o jogo na área de "Partidas" irá desaparecer. Isso confirma o fim da partida e que você poderá entrar na fila novamente. <br>
 						
 						<br><b>Lembre-se de que...</b><br> 
-						Deverão ser vencidos 5 rounds para finalizar a partida e <b>a opção "Reportar Problema" deve estar marcada em "Nenhum problema". </b><br>
-						Aguarde o reporte do outro time.... e se os dois valores reportados estiverem corretos então o reporte será finalizado com sucesso. <br>
+						Deverão ser vencidos 5 rounds para finalizar a partida e <b>a opção "Reportar Problema" deve estar marcada como padrão em "Nenhum problema". </b><br>
 						
 						<br><b>Se houver erro no reporte?</b><br>
 						Então os dois valores serão resetados e o reporte deverá ser feito novamente. <br>
+						Lembre de verificar os valores no final da janela de "Reportar Resultados" para saber se alguém do seu time já reportou o resultado. <br>
 
 						<br><b>Se duas ou mais pessoas reportarem?</b><br>
 						Apenas o ultimo valor reportado será válido. <br>
@@ -138,7 +147,7 @@
 
 						<br><b>Problemas antes ou durante a partida</b><br>
 						Caso haja algum problema você pode cancelar toda a partida escolhendo a opção em amarelo na área "Reportar Problema". Lembrando que esta opção exclui a partida por completo sem nenhuma punição para os participantes. <br>
-						Com o uso inadequado do cancelamento das partidas o player responsável poderá ser banido.<br>
+						Com o <a href={""} data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">uso inadequado</a> do cancelamento das partidas o player responsável poderá ser banido.<br>
 						</div>
 					</div>
 				</div>
