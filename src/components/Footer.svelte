@@ -3,9 +3,9 @@
 <main class="bg-white">
     <footer class="container jumbotron footer">
         <div class="row d-flex justify-content-center my-3">               
-            <a href={"#facebook"} class="mx-2"><i class="fab fa-facebook"></i></a>
-            <a href={"#discord"} class="mx-2"><i class="fab fa-discord"></i></a>
-            <a href={"#whatsapp"} class="mx-2"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/groups/battleritebrasil" target="_blank" class="mx-2"><i class="fab fa-facebook"></i></a>
+            <a href="https://discord.gg/bbFyk4d" target="_blank" class="mx-2"><i class="fab fa-discord"></i></a>
+            <a href="https://chat.whatsapp.com/FJsUz9C9Q973arux32rVfq" target="_blank" class="mx-2"><i class="fab fa-whatsapp"></i></a>
         </div>
         <div class="row d-flex justify-content-center">
                 <p class="text-center"><a href="/">Home</a> | <a href="/sobre">Sobre</a> | <a href="/builds">Builds</a> | <a href="/user">InHouse</a>
@@ -22,13 +22,10 @@
         margin: 0;
     }
     img{
-        max-height: 80px;
+        height: 75px;
         position: relative;
         bottom: -1px;
-        max-width: 20%;
-
     }
-
     a{
         color: black;
     }
@@ -39,6 +36,12 @@
     }
     i{
         font-size: 2.5rem;
+    }
+
+    @media(max-width: 767.98px){
+        img{
+            height: 45px;
+        }
     }
 
 </style>

@@ -11,13 +11,22 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./hero/reborn.jpg" class="w-100" alt="...">
+      <img src="./hero/hero1.jpg" class="w-100" alt="Battlerite Reborn">
+      <div class="carousel-caption d-block">
+        <h1>Battlerite Reborn</h1>
+      </div>
     </div>
     <div class="carousel-item">
-      <img src="./hero/reborn.jpg" class="w-100" alt="...">
+      <img src="./hero/hero2.jpg" class="w-100" alt="Pobre League Brasil">
+      <div class="carousel-caption d-block">
+        <h1>Pobre League Brasil</h1>
+      </div>
     </div>
     <div class="carousel-item">
-      <img src="./hero/reborn.jpg" class="w-100" alt="...">
+      <img src="./hero/hero3.png" class="w-100" alt="Last Update">
+      <div class="carousel-caption d-block">
+        <h1>Last Update</h1>
+      </div>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -59,7 +68,7 @@
 
   @media (max-width: 575.98px) { 
     #hero, img {
-      max-height: 50vh;
+      max-height: 90vh;
     }
 
    }
