@@ -14,10 +14,22 @@
 
   async function report(userValue, reportValue) {
     try {
-      if (problem !== "Nenhum problema") {
-        const fetchUpdate = await fetch(fetchURL + "/match/problem/" + $userStore.name )
-        const result = await fetchUpdate.json();
+      
+      let match = await $matchesStore;
+      let username = await $userStore.name;
+      console.log(match[0]);
+      console.log(username);
+      console.log(problem);
 
+      if (problem !== "Nenhum problema") {
+        const reportProblem = await fetch(fetchURL + '/match/problem', {
+				method: 'POST',
+				headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+				body: JSON.stringify({player: username, report: problem, match: match})
+			})
+			const result = await reportProblem.json();
+      console.log(result);
+      
         if (result.status !== undefined) {
           statusresponse = result.mensagem;
           await setTimeout(() => { statusresponse = undefined }, 3000)
@@ -58,6 +70,7 @@
         update();
         $reportStore.preresult.teama = '';
         $reportStore.preresult.teamb = '';  
+        problem = "Nenhum problema";
       }
       // Fetch Update para que todos recebam Update da partida neste local em conflito com result.update
       return;

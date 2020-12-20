@@ -163,7 +163,7 @@
 </script>
 
 <svelte:head>
-	<title>Logged</title>
+	<title>InHouse Reborn</title>
 </svelte:head>
 
 {#if error !== undefined}<Erro  error={error}/>{/if}
