@@ -8,7 +8,8 @@
 
     let main = "Jade";
     let statusresponse;
-    let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+    let fetchURL = "https://in-house-bpl-test.herokuapp.com";
+    // let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0

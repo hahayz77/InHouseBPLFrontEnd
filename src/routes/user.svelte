@@ -16,8 +16,8 @@
 	import Erro from '../components/Erro.svelte';
 	import Config from '../components/Config.svelte';
 
-	const PORT = "https://app-inhouseleagueblp.herokuapp.com";
-	// const PORT = "http://localhost:8081/";
+	const PORT = "https://in-house-bpl-test.herokuapp.com"
+	// const PORT = "https://app-inhouseleagueblp.herokuapp.com";
 
 	const socket = io(PORT, {
 		transports: ['websocket']
