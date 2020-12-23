@@ -80,7 +80,7 @@
 		font-family: "Brickton Regular";
 		letter-spacing: 0.1rem;
 	}
-	@media (max-width: 768px) {
+	@media (max-width: 991.98px) {
 		nav a img{
 			height: 7vh;
 		}

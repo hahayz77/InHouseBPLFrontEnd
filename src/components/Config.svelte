@@ -36,9 +36,10 @@
         statusresponse = result.status;
         if(statusresponse === "mainchampionok"){
             $userStore.main = main;
+            return;
         }
         else{
-            alert(error);
+            alert("Erro ao alterar main!");
         }
     }
     async function logOff(){
