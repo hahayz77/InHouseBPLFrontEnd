@@ -16,15 +16,15 @@
 	import Erro from '../components/Erro.svelte';
 	import Config from '../components/Config.svelte';
 
-	const PORT = "https://in-house-bpl-test.herokuapp.com"
-	
-	// const PORT = "https://app-inhouseleagueblp.herokuapp.com";
+	const fetchURL = "http://localhost:8081";
+	// const fetchURL = "https://in-house-bpl-test.herokuapp.com"
+	// const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
-	const socket = io(PORT, {
+	const socket = io(fetchURL, {
 		transports: ['websocket']
 	})		
 
-	let fetchURL = PORT;
+	let playerInput = '';
 	let error, status;
 	let input = '';
 	let queuePlayers;
@@ -50,6 +50,23 @@
 			}
 		}
 	})
+
+async function enterQueueINPUT(player){
+		await update();
+		if ($matchesStore[0] === undefined){
+			socket.emit('queueUpdate', player);
+		}
+		else{
+			var letQueue = $matchesStore[0].teams.indexOf(player);
+			if( letQueue === -1){
+				socket.emit('queueUpdate', player)
+			}
+			else{
+			error = "Você tem uma partida para finalizar!";
+			await setTimeout(() => {error = undefined}, 3000);
+			}
+		}
+	}
 
 	async function update(){
     try {
@@ -108,13 +125,14 @@
 
 	async function enterQueue(){
 		await update();
+		const player = await $userStore.name;
 		if ($matchesStore[0] === undefined){
-			socket.emit('queueUpdate', {name: $userStore.name});
+			socket.emit('queueUpdate', player);
 		}
 		else{
-			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
+			var letQueue = $matchesStore[0].teams.indexOf(player);
 			if( letQueue === -1){
-				socket.emit('queueUpdate', {name: $userStore.name})
+				socket.emit('queueUpdate', player)
 			}
 			else{
 			error = "Você tem uma partida para finalizar!";
@@ -250,6 +268,16 @@
 	</section>
 </section>
 
+<section class="container jumbotron">
+	<div class="row">
+		<div class="col-12">
+			<form on:submit|preventDefault={enterQueueINPUT(playerInput)}>
+				<input type="text" bind:value={playerInput}><input type="submit" value="enter">
+			</form>
+		</div>
+	</div>
+</section>
+
 		<div>
 			<Report />
 		</div>
@@ -285,20 +313,12 @@
 		background: rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
 	}
-	.list-group{
-		padding: 1rem;
-		margin-bottom: 1rem;
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		border-radius: 10px;
-	}
 	.list-group-item{
 		padding: 0.5rem 1rem;
 		border: none;
 	}
 	.ranking .card .card-body{
-		max-height: 80vh;
+		max-height: 470px;
 		overflow: auto;
 	}
 	.item-ranking{
@@ -326,6 +346,9 @@
 		.col-12{
 			padding-right: 0;
 			padding-left: 0;
+		}
+		.card-body{
+			padding: 1rem;
 		}
 	}
 

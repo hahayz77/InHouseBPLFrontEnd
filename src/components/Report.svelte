@@ -8,24 +8,23 @@
   let teamA, teamB, problem, team;
   let response;
   let statusresponse;
-  let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+
+  let fetchURL = "http://localhost:8081";
+  // let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
   // let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
 
   async function report(userValue, reportValue) {
     try {
       
-      let match = await $matchesStore;
-      let username = await $userStore.name;
-      console.log(match[0]);
-      console.log(username);
-      console.log(problem);
+      let report = await $reportStore;
+      let player = await $userStore.name;
 
       if (problem !== "Nenhum problema") {
         const reportProblem = await fetch(fetchURL + '/match/problem', {
 				method: 'POST',
 				headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-				body: JSON.stringify({player: username, report: problem, match: match})
+				body: JSON.stringify({player: player, report: report, problem: problem})
 			})
 			const result = await reportProblem.json();
       console.log(result);
@@ -37,6 +36,7 @@
         update();
         $reportStore.preresult.teama = '';
         $reportStore.preresult.teamb = ''; 
+        problem = "Nenhum problema";
 
       } else if (teamA === "5" && teamB === "5") {
         alert("Erro nos dados! Apenas um time pode vencer 5 rounds!");
