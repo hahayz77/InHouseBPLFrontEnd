@@ -3,34 +3,30 @@ import { matchesStore } from '../stores/matchesStore'
 
 </script>
 
-<section class="container jumbotron">
+<section class="container">
     {#each $matchesStore ? $matchesStore : [] as match, i}
-        <div class="">
-            <div class="">
-                <div class="row align-items-center justify-content-center mb-3">
-                    <div class="col-4">
-                        <div class="players row text-center">
-                            <span class="player col-12">{match.teams[0]}</span>
-                            <span class="player col-12">{match.teams[1]}</span>
-                            <span class="player col-12">{match.teams[2]}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="col-2 alert-danger ">
-                        <div class="row">
-                            <span class="result col-12 text-center">{match.result[0]} x {match.result[1]}</span>
-                        </div>
-                        <div class="row">
-                            <span class="report col-12 text-center">{match.reported === "false" ? "" : "Partida Reportada!" }</span>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="players row text-center">
-                            <span class="player col-12">{match.teams[3]}</span>
-                            <span class="player col-12">{match.teams[4]}</span>
-                            <span class="player col-12">{match.teams[5]}</span>
-                        </div>
-                    </div>
+        <div class="row align-items-center justify-content-center mb-3">
+            <div class="col-4">
+                <div class="players row text-center">
+                    <span class="player col-12">{match.teams[0]}</span>
+                    <span class="player col-12">{match.teams[1]}</span>
+                    <span class="player col-12">{match.teams[2]}</span>
+                </div>
+            </div>
+            
+            <div class="col-2 alert-danger ">
+                <div class="row">
+                    <span class="result col-12 text-center">{match.result[0]} x {match.result[1]}</span>
+                </div>
+                <div class="row">
+                    <span class="report col-12 text-center">{match.reported === "false" ? "" : "Partida Reportada!" }</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="players row text-center">
+                    <span class="player col-12">{match.teams[3]}</span>
+                    <span class="player col-12">{match.teams[4]}</span>
+                    <span class="player col-12">{match.teams[5]}</span>
                 </div>
             </div>
         </div>
@@ -71,6 +67,11 @@ import { matchesStore } from '../stores/matchesStore'
         .report{
             font-size: 0.5rem;
             padding: 0 0 5px 0;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 991.98px){
+        .result{
+            font-size: 1.5rem;
         }
     }
 </style>

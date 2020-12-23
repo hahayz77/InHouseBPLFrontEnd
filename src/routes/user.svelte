@@ -249,7 +249,7 @@ async function enterQueueINPUT(player){
 	<section class="container jumbotron">
 		<div class="row">
 			<div class="col-12">
-				<div class="card">
+				<div class="card match">
 					<div class="card-header">
 						<h3>Partidas</h3>
 					</div>
@@ -282,7 +282,7 @@ async function enterQueueINPUT(player){
 			<Report />
 		</div>
 		<div>
-			<Config ranking={rankingUsers}/>
+			<Config />
 		</div>
 
 
@@ -328,6 +328,10 @@ async function enterQueueINPUT(player){
 	.item-ranking img{
 		height: 50px;
 	}
+	.match .card-body{
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
 
 	@media (max-width: 767.98px) { 
 		.ranking, .user{
@@ -350,6 +354,10 @@ async function enterQueueINPUT(player){
 		.card-body{
 			padding: 1rem;
 		}
+		.match .card-body{
+			padding-right: 0.3rem;
+			padding-left: 0.3rem;
+	}
 	}
 
 </style>

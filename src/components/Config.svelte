@@ -36,6 +36,7 @@
         statusresponse = result.status;
         if(statusresponse === "mainchampionok"){
             $userStore.main = main;
+            alert("Main alterado com sucesso!");
             return;
         }
         else{
