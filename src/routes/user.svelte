@@ -1,5 +1,6 @@
 <script>
 	import io from 'socket.io-client';
+	import Push from 'push.js';
 
 	import { fade } from 'svelte/transition';
 
@@ -51,6 +52,22 @@
 		}
 	})
 
+async function notify(){
+	try {
+		Push.create("Partida encontrada!", {
+			body: "Simbora pra pancadaria!!!",
+			icon: 'logo-192.png',
+			timeout: 10000,
+			onClick: function () {
+				this.close();
+			}
+		})
+	} catch (error) {
+		console.log("Partida encontrada!")
+	}
+}
+
+
 async function enterQueueINPUT(player){
 		await update();
 		if ($matchesStore[0] === undefined){
@@ -98,6 +115,7 @@ async function enterQueueINPUT(player){
 			matchesStore.update((listaAtual)=>{
 				return matches;
 			})
+			notify();
 		} catch (error) {
 			throw {error}	
 		}
