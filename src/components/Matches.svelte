@@ -8,9 +8,9 @@ import { matchesStore } from '../stores/matchesStore'
         <div class="row align-items-center justify-content-center mb-3">
             <div class="col-4">
                 <div class="players row text-center">
-                    <span class="player col-12">{match.teams[0]}</span>
-                    <span class="player col-12">{match.teams[1]}</span>
-                    <span class="player col-12">{match.teams[2]}</span>
+                    <span class="player col-12">{match.teams[0].name}</span>
+                    <span class="player col-12">{match.teams[1].name}</span>
+                    <span class="player col-12">{match.teams[2].name}</span>
                 </div>
             </div>
             
@@ -24,9 +24,9 @@ import { matchesStore } from '../stores/matchesStore'
             </div>
             <div class="col-4">
                 <div class="players row text-center">
-                    <span class="player col-12">{match.teams[3]}</span>
-                    <span class="player col-12">{match.teams[4]}</span>
-                    <span class="player col-12">{match.teams[5]}</span>
+                    <span class="player col-12">{match.teams[3].name}</span>
+                    <span class="player col-12">{match.teams[4].name}</span>
+                    <span class="player col-12">{match.teams[5].name}</span>
                 </div>
             </div>
         </div>
