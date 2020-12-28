@@ -52,7 +52,7 @@
         }
         const fetchMatch = await fetch(fetchURL + "/match/result", {
           method: "PATCH",
-          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          headers: { Accept: "application/json", "Content-Type": "application/json"},
           body: JSON.stringify({
             team: team,
             preresult: [teamA, teamB],
