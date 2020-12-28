@@ -16,6 +16,7 @@
 	import Report from '../components/Report.svelte';
 	import Erro from '../components/Erro.svelte';
 	import Config from '../components/Config.svelte';
+	import Player from '../components/Player.svelte';
 
 	const fetchURL = "http://localhost:8081";
 	// const fetchURL = "https://in-house-bpl-test.herokuapp.com"
@@ -33,6 +34,7 @@
 	let reportRes;
 	let winrate;
 	let rankingUsers = [];
+	let rankingPlayer;
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -57,7 +59,7 @@ async function notify(){
 		Push.create("Partida encontrada!", {
 			body: "Simbora pra pancadaria!!!",
 			icon: 'logo-192.png',
-			timeout: 10000,
+			timeout: 30000,
 			onClick: function () {
 				this.close();
 			}
@@ -188,6 +190,13 @@ async function enterQueueINPUT(player){
 		return;
 	  }
 
+	  function showPlayer(main, name, points, wins, loses, id){
+		let winratePlayer = (wins / (wins + loses)) * 100;
+      	winratePlayer = parseFloat(winratePlayer.toFixed(1));
+
+		  rankingPlayer = {main: main, name: name, points: points, wins: wins, loses: loses, id: id, winrate: winratePlayer};
+	  }
+
 	  // ########################################   ERROR
 	  
 	socket.on('error', async (err) => {
@@ -228,11 +237,13 @@ async function enterQueueINPUT(player){
 			<div class="card">
 				<div class="card-header"><h3>Ranking</h3></div>
 				<div class="card-body">
-					{#each rankingUsers as {name, main, points}, id}
+					{#each rankingUsers as {name, main, points, wins, loses}, id}
 					<div class="item-ranking">
-						<span class="rank">{id+1}</span>
-						<img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
-						<span class="name">{name}</span>
+						<a href={""} on:click={showPlayer(main, name, points, wins, loses, id)} data-toggle="modal" data-target="#ModalPlayer">
+							<span class="rank">{id+1}</span>
+							<img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
+							<span class="name">{name}</span>
+						</a>
 						<span class="points float-right">{points}</span>
 					</div>
 					{/each}
@@ -302,6 +313,9 @@ async function enterQueueINPUT(player){
 		<div>
 			<Config />
 		</div>
+		<div>
+			<Player player={rankingPlayer} />
+		</div>
 
 
 <style>
@@ -346,6 +360,13 @@ async function enterQueueINPUT(player){
 	.item-ranking img{
 		height: 50px;
 	}
+	.item-ranking a{
+		text-decoration: none;
+		color: black;
+	}
+	.item-ranking span{
+		line-height: 2.8rem;
+	}
 	.match .card-body{
 		padding-right: 1rem;
 		padding-left: 1rem;
@@ -375,7 +396,10 @@ async function enterQueueINPUT(player){
 		.match .card-body{
 			padding-right: 0.3rem;
 			padding-left: 0.3rem;
-	}
+		}
+		.item-ranking span{
+		line-height: 2rem;
+		}
 	}
 
 </style>

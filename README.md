@@ -1,7 +1,17 @@
 # InHouse Battlerite League 0.2
 
+## Para fazer
+- [ ] Histórico de Partidas;
+- [ ] Histórico de Reports;
+- [ ] Delay para botão Entrar na fila;
+- [x] Perfil no ranking;
+- [ ] Cargas;
+
+## Problemas
+- Push.js erro no navigation substituido por um console.log();
 
 
+-------
 ### Running the project
 
 However you get the code, you can install dependencies and run the project in development mode with:
