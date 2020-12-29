@@ -18,15 +18,13 @@
 	import Config from '../components/Config.svelte';
 	import Player from '../components/Player.svelte';
 
-	const fetchURL = "http://localhost:8081";
-	// const fetchURL = "https://in-house-bpl-test.herokuapp.com"
-	// const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+	// const fetchURL = "http://localhost:8081";
+	const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
 	})		
 
-	let playerInput = '';
 	let error, status;
 	let input = '';
 	let queuePlayers;
@@ -68,24 +66,6 @@ async function notify(){
 		console.log("Partida encontrada!")
 	}
 }
-
-
-async function enterQueueINPUT(player){
-		await update();
-		if ($matchesStore[0] === undefined){
-			socket.emit('queueUpdate', player);
-		}
-		else{
-			var letQueue = $matchesStore[0].teams.indexOf(player);
-			if( letQueue === -1){
-				socket.emit('queueUpdate', player)
-			}
-			else{
-			error = "Você tem uma partida para finalizar!";
-			await setTimeout(() => {error = undefined}, 3000);
-			}
-		}
-	}
 
 	async function update(){
     try {
@@ -295,16 +275,6 @@ async function enterQueueINPUT(player){
 			</div>
 		</div>
 	</section>
-</section>
-
-<section class="container jumbotron">
-	<div class="row">
-		<div class="col-12">
-			<form on:submit|preventDefault={enterQueueINPUT(playerInput)}>
-				<input type="text" bind:value={playerInput}><input type="submit" value="enter">
-			</form>
-		</div>
-	</div>
 </section>
 
 		<div>
