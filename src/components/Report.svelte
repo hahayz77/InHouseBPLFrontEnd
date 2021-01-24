@@ -70,6 +70,8 @@
         $reportStore.preresult.teama = '';
         $reportStore.preresult.teamb = '';  
         problem = "Nenhum problema";
+        teamA = 0;
+        teamB = 0;
       }
       // Fetch Update para que todos recebam Update da partida neste local em conflito com result.update
       return;
