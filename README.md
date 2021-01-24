@@ -3,8 +3,10 @@
 ## Para fazer
 - [ ] Histórico de Partidas;
 - [ ] Histórico de Reports;
-- [ ] Delay para botão Entrar na fila;
+- [x] Delay para botão Entrar na fila;
 - [x] Perfil no ranking;
+- [x] Histórico de Temporadas;
+- [ ] Sistema de Bans
 - [ ] Cargas;
 
 ## Problemas

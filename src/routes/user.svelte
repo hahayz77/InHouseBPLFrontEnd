@@ -27,7 +27,7 @@
 	})		
 
 	let error, status;
-	let input = '';
+	let input = 'player1';
 	let queuePlayers;
 	let reportMatch, reportResult;
 	let reportRes;
@@ -35,6 +35,7 @@
 	let rankingUsers = [];
 	let rankingPlayer;
 	let oldRankings = [];
+	let pressed = false;
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -126,6 +127,7 @@ async function notify(){
 	})
 
 	async function enterQueue(){
+		pressed = true;
 		await update();
 		const player = await $userStore.name;
 		if ($matchesStore[0] === undefined){
@@ -141,10 +143,28 @@ async function notify(){
 			await setTimeout(() => {error = undefined}, 3000);
 			}
 		}
+		return await setTimeout(() => { pressed = false; }, 3000);
 	}
 
 	async function outQueue(){
 		socket.emit('queueDelete', $userStore.id || $userStore._id);
+	}
+
+	async function enterQueueINPUT(){
+		await update();
+		if ($matchesStore[0] === undefined){
+			socket.emit('queueUpdate', input)
+		}
+		else{
+			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
+			if( letQueue === -1){
+				socket.emit('queueUpdate', input)
+			}
+			else{
+			error = "Você tem uma partida para finalizar!";
+			await setTimeout(() => {error = undefined}, 3000);
+			}
+		}
 	}
 
 	// ########################################   REPORT
@@ -221,7 +241,11 @@ async function notify(){
 					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
 					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
 					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
-					<button type="button" on:click={enterQueue} class="btn btn-success"><i class="fas fa-play"></i> Entrar na fila</button>
+					{#if pressed === false}
+						<button type="button" on:click={enterQueue} class="btn btn-success"><i class="fas fa-play"></i> Entrar na fila</button>
+					{:else}
+						<button type="button" class="btn btn-success disabled" disabled><i class="fas fa-clock"></i> Entrar na fila</button>
+					{/if}
 					<button type="button" on:click={outQueue} class="btn btn-danger"><i class="fas fa-stop"></i> Sair da fila</button>
 					<button type="button" on:click={clickReport} class="btn btn-warning" data-toggle="modal" data-target="#reportModal"><i class="fas fa-dice"></i> Reportar resultado</button>
 				</div>
@@ -292,6 +316,18 @@ async function notify(){
 	</section>
 </section>
 
+<section class="container jumbotron">
+	<div class="row">
+		<div class="col-12">
+			<form on:submit|preventDefault={enterQueueINPUT}>
+				<input type="text" bind:value={input}>
+				<input type="submit" class="btn btn-primary">
+				<p>{input}</p>
+			</form>
+		</div>
+	</div>
+</section>
+
 	<Report />
 	<Config />
 	<Player player={rankingPlayer} />
@@ -299,6 +335,9 @@ async function notify(){
 
 
 <style>
+	.disabled{
+		cursor: default;
+	}
 	img{
 		max-width: 100%;
 	}
