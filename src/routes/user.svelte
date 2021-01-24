@@ -17,9 +17,10 @@
 	import Erro from '../components/Erro.svelte';
 	import Config from '../components/Config.svelte';
 	import Player from '../components/Player.svelte';
+	import Ranking from '../components/Ranking.svelte';
 
-	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+	const fetchURL = "http://localhost:8081";
+	// const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
@@ -33,6 +34,7 @@
 	let winrate;
 	let rankingUsers = [];
 	let rankingPlayer;
+	let oldRankings = [];
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -170,6 +172,18 @@ async function notify(){
 		return;
 	  }
 
+	  async function oldRankingsClick(){
+		try {
+			const fetchUpdate = await fetch( fetchURL + "/user/pastrankings/");
+			const result = await fetchUpdate.json();
+			oldRankings = result;
+			console.log(result);
+			return;	
+		} catch (error) {
+			console.log(error);
+		}	
+	  }
+
 	  function showPlayer(main, name, points, wins, loses, id){
 		let winratePlayer = (wins / (wins + loses)) * 100;
       	winratePlayer = parseFloat(winratePlayer.toFixed(1));
@@ -207,15 +221,15 @@ async function notify(){
 					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
 					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
 					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
-					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
-					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
-					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#reportModal">
+					<button type="button" on:click={enterQueue} class="btn btn-success"><i class="fas fa-play"></i> Entrar na fila</button>
+					<button type="button" on:click={outQueue} class="btn btn-danger"><i class="fas fa-stop"></i> Sair da fila</button>
+					<button type="button" on:click={clickReport} class="btn btn-warning" data-toggle="modal" data-target="#reportModal"><i class="fas fa-dice"></i> Reportar resultado</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-sm-6 col-md-6 px-3 ranking">
 			<div class="card">
-				<div class="card-header"><h3>Ranking</h3></div>
+				<div class="card-header"><h3>Ranking <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="fas fa-trophy text-dark"></i></a></h3></div>
 				<div class="card-body">
 					{#each rankingUsers as {name, main, points, wins, loses}, id}
 					<div class="item-ranking">
@@ -226,6 +240,7 @@ async function notify(){
 						</a>
 						<span class="points float-right">{points}</span>
 					</div>
+					<hr class="my-0 mx-3">
 					{/each}
 				</div>
 			</div>
@@ -277,15 +292,10 @@ async function notify(){
 	</section>
 </section>
 
-		<div>
-			<Report />
-		</div>
-		<div>
-			<Config />
-		</div>
-		<div>
-			<Player player={rankingPlayer} />
-		</div>
+	<Report />
+	<Config />
+	<Player player={rankingPlayer} />
+	<Ranking rankings={oldRankings}/>
 
 
 <style>

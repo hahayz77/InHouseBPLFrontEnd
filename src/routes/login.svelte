@@ -4,8 +4,8 @@
 
 	import { slide } from 'svelte/transition';
 	
-	// let fetchURL = "http://localhost:8081";
-	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
+	let fetchURL = "http://localhost:8081";
+	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
 
 	// ########################################### Variáveis do Usuário
 	let username = '';
@@ -57,7 +57,7 @@
 			}
 			else{
 				loginIcon = false;
-				alert("error");
+				alert(result.mensagem);
 				return;
 			}
 			

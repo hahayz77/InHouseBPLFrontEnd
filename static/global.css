@@ -11,7 +11,7 @@ p{
 }
 
 h1, h2, h3 {
-	font-family: "Brickton Regular";
+	font-family: "Brickton Regular", 'Archivo Black', 'Tahoma', sans-serif;
 }
 
 @font-face {
@@ -41,4 +41,67 @@ h1, h2, h3 {
 	p{
 		font-size: 15px;
 	}
+}
+
+.btn-success, .btn-success:active {
+	color: #000;
+	background-color: #28a74570;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-danger, .btn-success:active {
+	color: #000;
+	background-color: #dc354594;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-warning, .btn-success:active {
+	color: #000;
+	background-color: #ffc10773;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-warning:hover{
+	color: white;
+}
+.btn-primary, .btn-success:active {
+	color: #000;
+	background-color: #007bff57;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar {
+	width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategrey;
+}
+
+.card-body::-webkit-scrollbar {
+	width: 1em;
+}
+
+.card-body::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-body::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategrey;
+}
+
+.modal-body::-webkit-scrollbar {
+	width: 1em;
+}
+
+.modal-body::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategrey;
 }
