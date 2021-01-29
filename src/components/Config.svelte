@@ -10,7 +10,7 @@
     let statusresponse;
     
     // let fetchURL = "http://localhost:8081";
-    let fetchURL = "https://134.122.11.41";
+    let fetchURL = "https://in-house-bpl-test.herokuapp.com";
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0

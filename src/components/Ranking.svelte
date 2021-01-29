@@ -13,7 +13,7 @@
     let rankingTitle = "";
     let selectedPlayer;
     
-    let fetchURL = "https://134.122.11.41";
+    let fetchURL = "https://in-house-bpl-test.herokuapp.com";
     // let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
     
     let offUser = {

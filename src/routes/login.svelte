@@ -5,7 +5,7 @@
 	import { slide } from 'svelte/transition';
 	
 	// let fetchURL = "http://localhost:8081";
-	let fetchURL = 'https://134.122.11.41'; 
+	let fetchURL = 'https://in-house-bpl-test.herokuapp.com'; 
 
 	// ########################################### Variáveis do Usuário
 	let username = '';
