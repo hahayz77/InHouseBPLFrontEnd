@@ -19,7 +19,7 @@
 	import Player from '../components/Player.svelte';
 
 	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "http://134.122.11.41:8081";
+	const fetchURL = "https://134.122.11.41";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
