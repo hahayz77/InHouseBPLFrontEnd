@@ -66,9 +66,9 @@
 							Quando o ranking for atualizado novamente o seu main será atualizado para todos. <br>
 
 							<br><b>Sobre pontuação no ranking</b><br>
-							A cada round que você vencer ganhará 1 ponto e a cada round que você perder será subtraído 1 ponto. <br>
-							Ou seja, 5 a 3 resultará em +2 pontos para os players vencedores e -2 pontos aos que perderam a partida. <br>
-							Ao passo que, 5 a 0 resultará em +5 pontos para os vencedores e -5 para os que perderam. <br>
+							A distribuição de pontos varia de acordo com o cálculo total de pontos dos times, o "peso" dos times, que poderá ir até 10 pontos. <br>
+							Se o time A tiver mais pontos do que o time B e A ganhar de B então A ganhará menos pontos. Sendo assim, o time com menor "peso" sempre ganhara mais pontos do que o time com maior "peso". <br>
+							Jogadores com pontos negativos tem redução na penalidade em 5 pontos sempre que perderem.<br>
 							
 							<br><b>Logout</b><br>
 							Clicando em <i class="fas fa-cog text-dark"></i> e logo em seguida no botão <button type="button" class="btn btn-danger">Log Out</button> <br>

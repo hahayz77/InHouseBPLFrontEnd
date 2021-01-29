@@ -19,7 +19,7 @@
 	import Player from '../components/Player.svelte';
 	import Ranking from '../components/Ranking.svelte';
 
-	const fetchURL = "http://localhost:8081";
+	const fetchURL = "http://134.122.11.41:8081/";
 	// const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
 
 	const socket = io(fetchURL, {
@@ -253,7 +253,7 @@ async function notify(){
 		</div>
 		<div class="col-12 col-sm-6 col-md-6 px-3 ranking">
 			<div class="card">
-				<div class="card-header"><h3>Ranking <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="fas fa-trophy text-dark"></i></a></h3></div>
+				<div class="card-header"><h3>RANKING <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="fas fa-trophy text-dark"></i></a></h3></div>
 				<div class="card-body">
 					{#each rankingUsers as {name, main, points, wins, loses}, id}
 					<div class="item-ranking">
@@ -275,7 +275,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3>Fila</h3>
+						<h3>FILA</h3>
 					</div>
 					<div class="card-body">
 						{#if queuePlayers == undefined}
@@ -299,7 +299,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card match">
 					<div class="card-header">
-						<h3>Partidas</h3>
+						<h3>PARTIDAS</h3>
 					</div>
 					<div class="card-body">
 						{#if $matchesStore === undefined}
