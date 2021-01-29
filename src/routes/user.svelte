@@ -19,7 +19,7 @@
 	import Player from '../components/Player.svelte';
 
 	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
+	const fetchURL = "http://134.122.11.41:8081";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
