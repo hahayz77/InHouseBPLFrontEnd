@@ -1,10 +1,27 @@
 <script>
-import { matchesStore } from '../stores/matchesStore'
+    import { matchesStore } from '../stores/matchesStore';
+	import { onMount } from 'svelte';
+
+    var timeResult = [];
+
+    onMount(async () => {
+
+        for(var i in  $matchesStore){
+            var d = new Date(await $matchesStore[i].time);
+            timeResult[i] = d.toLocaleDateString() + " " + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+        
+    })
 
 </script>
 
 <section class="container">
     {#each $matchesStore ? $matchesStore : [] as match, i}
+        <div class="row align-items-center justify-content-center mb-0">
+            <div class="col-6 mx-auto infos text-center">
+                <span>{match.randomMap} {timeResult[i]}</span>
+            </div>
+        </div>
         <div class="row align-items-center justify-content-center mb-3">
             <div class="col-4">
                 <div class="players row text-center">
@@ -48,6 +65,17 @@ import { matchesStore } from '../stores/matchesStore'
     .result{
         font-size: 2rem;
     }
+    .infos{
+        border-top: 1px solid #721c24;
+        border-bottom: 1px solid #721c24;
+        border-radius: 5px;
+        background-color: #f8d7dab2;
+    }
+    .infos span{
+        font-size: 1rem;
+        color: #721c24;
+
+    }
     .player{
         background: rgba(167, 152, 255, 0.7);
         font-size: 1.2rem;
@@ -58,15 +86,21 @@ import { matchesStore } from '../stores/matchesStore'
     }
     @media (max-width: 767.98px) { 
         .result{
-            font-size: 1rem;
+            font-size: .9rem;
             padding: 1rem 0;
         }
         .player{
-            font-size: 1rem;
+            font-size: .8rem;
         }
         .report{
             font-size: 0.5rem;
             padding: 0 0 5px 0;
+        }
+        .infos{
+            width: 80%;
+        }
+        .infos span{
+            font-size: .8rem;
         }
     }
     @media (min-width: 768px) and (max-width: 991.98px){

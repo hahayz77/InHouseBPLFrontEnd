@@ -18,6 +18,7 @@
 	import Config from '../components/Config.svelte';
 	import Player from '../components/Player.svelte';
 	import Ranking from '../components/Ranking.svelte';
+	import History from '../components/History.svelte';
 
 	const fetchURL = "http://localhost:8081";
 	// const fetchURL = "http://134.122.11.41:8081";
@@ -36,6 +37,8 @@
 	let rankingPlayer;
 	let oldRankings = [];
 	let pressed = false;
+	let matchesHistory;
+	let timeResult = [];
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -105,6 +108,24 @@ async function notify(){
 			throw {error}	
 		}
 	})
+
+	async function getHistoric(){
+    try {
+      const fetchHistory = await fetch(fetchURL + "/match/historic/")
+      const result = await fetchHistory.json();
+	  matchesHistory = result.historic;
+	  
+	  for(var i in  matchesHistory){
+            var d = new Date(matchesHistory[i].time);
+            timeResult[i] = d.toLocaleDateString() + "  " + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+		}
+	  
+	  return;
+	  
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 	// ########################################   QUEUE
 
@@ -299,7 +320,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card match">
 					<div class="card-header">
-						<h3>PARTIDAS</h3>
+						<h3>PARTIDAS <a href={""} on:click={getHistoric} data-toggle="modal" data-target="#ModalHistory" class="float-right"><i class="fas fa-history text-dark"></i></a></h3>
 					</div>
 					<div class="card-body">
 						{#if $matchesStore === undefined}
@@ -332,6 +353,7 @@ async function notify(){
 	<Config />
 	<Player player={rankingPlayer} />
 	<Ranking rankings={oldRankings}/>
+	<History historic={matchesHistory} timeRes={timeResult}/>
 
 
 <style>
