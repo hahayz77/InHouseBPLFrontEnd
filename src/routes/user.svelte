@@ -21,7 +21,7 @@
 	import History from '../components/History.svelte';
 
 	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://projeto.br-rgt.net/";
+	const fetchURL = "https://projeto.br-rgt.net";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']

@@ -5,7 +5,7 @@
 	import { slide } from 'svelte/transition';
 	
 	// let fetchURL = "http://localhost:8081";
-	let fetchURL = 'https://projeto.br-rgt.net/';
+	let fetchURL = 'https://projeto.br-rgt.net';
 
 	// ########################################### Variáveis do Usuário
 	let username = '';
