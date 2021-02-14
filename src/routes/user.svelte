@@ -17,22 +17,32 @@
 	import Erro from '../components/Erro.svelte';
 	import Config from '../components/Config.svelte';
 	import Player from '../components/Player.svelte';
+	import Ranking from '../components/Ranking.svelte';
+	import History from '../components/History.svelte';
 
 	// const fetchURL = "http://localhost:8081";
+<<<<<<< HEAD
 	const fetchURL = "https://in-house-bpl-test.herokuapp.com";
+=======
+	const fetchURL = "https://projeto.br-rgt.net/";
+>>>>>>> TestServer
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
 	})		
 
 	let error, status;
-	let input = '';
+	let input = 'player1';
 	let queuePlayers;
 	let reportMatch, reportResult;
 	let reportRes;
 	let winrate;
 	let rankingUsers = [];
 	let rankingPlayer;
+	let oldRankings = [];
+	let pressed = false;
+	let matchesHistory;
+	let timeResult = [];
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -103,6 +113,24 @@ async function notify(){
 		}
 	})
 
+	async function getHistoric(){
+    try {
+      const fetchHistory = await fetch(fetchURL + "/match/historic/")
+      const result = await fetchHistory.json();
+	  matchesHistory = result.historic;
+	  
+	  for(var i in  matchesHistory){
+            var d = new Date(matchesHistory[i].time);
+            timeResult[i] = d.toLocaleDateString() + "  " + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+		}
+	  
+	  return;
+	  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 	// ########################################   QUEUE
 
 	socket.on('queueInit', async (queue) => {
@@ -124,6 +152,7 @@ async function notify(){
 	})
 
 	async function enterQueue(){
+		pressed = true;
 		await update();
 		const player = await $userStore.name;
 		if ($matchesStore[0] === undefined){
@@ -139,10 +168,28 @@ async function notify(){
 			await setTimeout(() => {error = undefined}, 3000);
 			}
 		}
+		return await setTimeout(() => { pressed = false; }, 3000);
 	}
 
 	async function outQueue(){
 		socket.emit('queueDelete', $userStore.id || $userStore._id);
+	}
+
+	async function enterQueueINPUT(){
+		await update();
+		if ($matchesStore[0] === undefined){
+			socket.emit('queueUpdate', input)
+		}
+		else{
+			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
+			if( letQueue === -1){
+				socket.emit('queueUpdate', input)
+			}
+			else{
+			error = "Você tem uma partida para finalizar!";
+			await setTimeout(() => {error = undefined}, 3000);
+			}
+		}
 	}
 
 	// ########################################   REPORT
@@ -168,6 +215,18 @@ async function notify(){
 		rankingStore.update(listaAtual => { return result })
 		rankingUsers = $rankingStore;
 		return;
+	  }
+
+	  async function oldRankingsClick(){
+		try {
+			const fetchUpdate = await fetch( fetchURL + "/user/pastrankings/");
+			const result = await fetchUpdate.json();
+			oldRankings = result;
+			console.log(result);
+			return;	
+		} catch (error) {
+			console.log(error);
+		}	
 	  }
 
 	  function showPlayer(main, name, points, wins, loses, id){
@@ -207,15 +266,19 @@ async function notify(){
 					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
 					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
 					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
-					<input type="button" on:click={enterQueue} class="btn btn-success" value="Entrar na fila">
-					<input type="button" on:click={outQueue} class="btn btn-danger" value="Sair da fila">
-					<input type="button" on:click={clickReport} class="btn btn-warning" value="Reportar resultado" data-toggle="modal" data-target="#reportModal">
+					{#if pressed === false}
+						<button type="button" on:click={enterQueue} class="btn btn-success"><i class="fas fa-play"></i> Entrar na fila</button>
+					{:else}
+						<button type="button" class="btn btn-success disabled" disabled><i class="fas fa-clock"></i> Entrar na fila</button>
+					{/if}
+					<button type="button" on:click={outQueue} class="btn btn-danger"><i class="fas fa-stop"></i> Sair da fila</button>
+					<button type="button" on:click={clickReport} class="btn btn-warning" data-toggle="modal" data-target="#reportModal"><i class="fas fa-dice"></i> Reportar resultado</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-12 col-sm-6 col-md-6 px-3 ranking">
 			<div class="card">
-				<div class="card-header"><h3>Ranking</h3></div>
+				<div class="card-header"><h3>RANKING <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="fas fa-trophy text-dark"></i></a></h3></div>
 				<div class="card-body">
 					{#each rankingUsers as {name, main, points, wins, loses}, id}
 					<div class="item-ranking">
@@ -226,6 +289,7 @@ async function notify(){
 						</a>
 						<span class="points float-right">{points}</span>
 					</div>
+					<hr class="my-0 mx-3">
 					{/each}
 				</div>
 			</div>
@@ -236,7 +300,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3>Fila</h3>
+						<h3>FILA</h3>
 					</div>
 					<div class="card-body">
 						{#if queuePlayers == undefined}
@@ -260,7 +324,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card match">
 					<div class="card-header">
-						<h3>Partidas</h3>
+						<h3>PARTIDAS <a href={""} on:click={getHistoric} data-toggle="modal" data-target="#ModalHistory" class="float-right"><i class="fas fa-history text-dark"></i></a></h3>
 					</div>
 					<div class="card-body">
 						{#if $matchesStore === undefined}
@@ -277,18 +341,29 @@ async function notify(){
 	</section>
 </section>
 
-		<div>
-			<Report />
+<section class="container jumbotron">
+	<div class="row">
+		<div class="col-12">
+			<form on:submit|preventDefault={enterQueueINPUT}>
+				<input type="text" bind:value={input}>
+				<input type="submit" class="btn btn-primary">
+				<p>{input}</p>
+			</form>
 		</div>
-		<div>
-			<Config />
-		</div>
-		<div>
-			<Player player={rankingPlayer} />
-		</div>
+	</div>
+</section>
+
+	<Report />
+	<Config />
+	<Player player={rankingPlayer} />
+	<Ranking rankings={oldRankings}/>
+	<History historic={matchesHistory} timeRes={timeResult}/>
 
 
 <style>
+	.disabled{
+		cursor: default;
+	}
 	img{
 		max-width: 100%;
 	}

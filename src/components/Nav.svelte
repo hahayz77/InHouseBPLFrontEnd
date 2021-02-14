@@ -77,7 +77,7 @@
 		padding: 1em 0.5em;
 		display: block;
 		color: black;
-		font-family: "Brickton Regular";
+		font-family: "Brickton Regular", 'Archivo Black', 'Tahoma', sans-serif;
 		letter-spacing: 0.1rem;
 	}
 	@media (max-width: 991.98px) {

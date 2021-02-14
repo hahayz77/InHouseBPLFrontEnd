@@ -10,7 +10,11 @@
     let statusresponse;
     
     // let fetchURL = "http://localhost:8081";
+<<<<<<< HEAD
     let fetchURL = "https://in-house-bpl-test.herokuapp.com";
+=======
+    let fetchURL = "https://projeto.br-rgt.net/";
+>>>>>>> TestServer
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0
@@ -96,10 +100,10 @@
             <option value="Varesh">Varesh</option>
             <option value="Zander">Zander</option>
         </select>
+        <button type="button" class="btn btn-primary my-3" on:click={mainChar}><i class="fas fa-check"></i> Salvar Mudanças</button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" on:click={logOff}>Log Out</button>
-        <button type="button" class="btn btn-primary" on:click={mainChar}>Salvar Mudanças</button>
+        <button type="button" class="btn btn-danger mr-auto" on:click={logOff}><i class="fas fa-sign-out-alt"></i> Log Out</button>
       </div>
     </div>
   </div>

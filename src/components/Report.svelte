@@ -10,7 +10,11 @@
   let statusresponse;
 
   // let fetchURL = "http://localhost:8081";
+<<<<<<< HEAD
   let fetchURL = "https://in-house-bpl-test.herokuapp.com";
+=======
+  let fetchURL = "https://projeto.br-rgt.net/";
+>>>>>>> TestServer
 
 
   async function report(userValue, reportValue) {
@@ -70,6 +74,8 @@
         $reportStore.preresult.teama = '';
         $reportStore.preresult.teamb = '';  
         problem = "Nenhum problema";
+        teamA = 0;
+        teamB = 0;
       }
       // Fetch Update para que todos recebam Update da partida neste local em conflito com result.update
       return;
