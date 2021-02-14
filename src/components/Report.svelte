@@ -9,8 +9,8 @@
   let response;
   let statusresponse;
 
-  let fetchURL = "http://localhost:8081";
-  // let fetchURL = "http://134.122.11.41:8081";
+  // let fetchURL = "http://localhost:8081";
+  let fetchURL = "https://projeto.br-rgt.net/";
 
 
   async function report(userValue, reportValue) {

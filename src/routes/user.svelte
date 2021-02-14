@@ -20,8 +20,8 @@
 	import Ranking from '../components/Ranking.svelte';
 	import History from '../components/History.svelte';
 
-	const fetchURL = "http://localhost:8081";
-	// const fetchURL = "http://134.122.11.41:8081";
+	// const fetchURL = "http://localhost:8081";
+	const fetchURL = "https://projeto.br-rgt.net/";
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
