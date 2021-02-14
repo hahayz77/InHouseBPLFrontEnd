@@ -4,14 +4,11 @@
   import { matchesStore } from "../stores/matchesStore";
   import Status from "../components/Status.svelte";
 
-  // export let myteam = "1";
   let teamA, teamB, problem, team;
   let response;
   let statusresponse;
 
-  // let fetchURL = "http://localhost:8081";
-  let fetchURL = "https://projeto.br-rgt.net";
-
+  export let fetchURL;
 
   async function report(userValue, reportValue) {
     try {

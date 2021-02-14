@@ -4,8 +4,10 @@
 
 	import { slide } from 'svelte/transition';
 	
+	// SEM "/" NO FINAL
 	// let fetchURL = "http://localhost:8081";
-	let fetchURL = 'https://projeto.br-rgt.net';
+	// let fetchURL = 'https://projeto.br-rgt.net';
+	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
 
 	// ########################################### Variáveis do Usuário
 	let username = '';

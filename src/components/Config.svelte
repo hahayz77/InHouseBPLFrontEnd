@@ -9,8 +9,7 @@
     let main = "Jade";
     let statusresponse;
     
-    // let fetchURL = "http://localhost:8081";
-    let fetchURL = "https://projeto.br-rgt.net";
+    export let fetchURL;
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0

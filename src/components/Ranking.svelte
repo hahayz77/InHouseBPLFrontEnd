@@ -5,16 +5,15 @@
   import { rankingStore } from '../stores/rankingStore';
 
   export let rankings = [];
+  export let loading;
 
     let main = "Jade";
     let statusresponse;
     let iRanking = 0;
     let rankingSelect = [];
     let rankingTitle = "";
+    let rankingDate = '';
     let selectedPlayer;
-    
-    // let fetchURL = "http://localhost:8081";
-    let fetchURL = "https://projeto.br-rgt.net";
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0
@@ -33,6 +32,7 @@
 }
     function searchRanking(){
         rankingTitle = rankings[iRanking].name;
+        rankingDate = rankings[iRanking].date;
         return rankingSelect = rankings[iRanking].ranking;        
     }
 
@@ -47,23 +47,32 @@
         </button>
       </div>
       <div class="modal-body">
+        {#if loading === false}
         <h4>Selecione a Temporada:</h4>
         <select class="form-control" bind:value={iRanking}>
-            {#each rankings as {name}, id}
+            {#each rankings as {name, date}, id}
               <option value={id}>{name}</option>
             {/each}
         </select>
             <button type="button" class="btn btn-primary my-3" on:click={searchRanking}><i class="fas fa-check"></i> Selecionar</button>
-        <hr>
-        <h4>{rankingTitle}</h4>
-        {#each rankingSelect as {name, main, points, wins, loses}, id}
-					<div class="item-ranking">
-							<span class="rank">{id+1}</span>
-							<img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
-							<span class="name">{name}</span>   
-						<span class="points float-right">{points}</span>
-					</div>
-					{/each}
+            <hr>
+            <h4>{rankingTitle}</h4>
+            <h5>{rankingDate}</h5>
+            {#each rankingSelect as {name, main, points, wins, loses}, id}
+            <div class="item-ranking">
+                    <span class="rank">{id+1}</span>
+                    <img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
+                    <span class="name">{name}</span>   
+                <span class="points float-right">{points}</span>
+            </div>
+            {/each}
+            {:else}
+                <div class="text-center my-3">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            {/if}
       </div>
     </div>
   </div>

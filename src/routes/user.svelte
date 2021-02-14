@@ -20,8 +20,10 @@
 	import Ranking from '../components/Ranking.svelte';
 	import History from '../components/History.svelte';
 
+	// SEM "/" NO FINAL
 	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://projeto.br-rgt.net";
+	// const fetchURL = "https://projeto.br-rgt.net";
+	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
@@ -38,6 +40,7 @@
 	let pressed = false;
 	let matchesHistory;
 	let timeResult = [];
+	let loading = false;
 
 	onMount(async () => {
 		if($userStore.id === '' || $userStore._id === ''){
@@ -197,10 +200,11 @@ async function notify(){
 
 	  async function oldRankingsClick(){
 		try {
+			loading = true;
 			const fetchUpdate = await fetch( fetchURL + "/user/pastrankings/");
 			const result = await fetchUpdate.json();
 			oldRankings = result;
-			console.log(result);
+			loading = false;
 			return;	
 		} catch (error) {
 			console.log(error);
@@ -282,7 +286,11 @@ async function notify(){
 					</div>
 					<div class="card-body">
 						{#if queuePlayers == undefined}
-							<h4 class="text-center alert my-3">Carregando fila...</h4>
+							<div class="text-center my-3">
+								<div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>							
 						{:else if queuePlayers == ""}
 							<h4 class="text-center alert my-3">Nenhum player aguardando na fila!</h4>
 						{:else}
@@ -306,7 +314,11 @@ async function notify(){
 					</div>
 					<div class="card-body">
 						{#if $matchesStore === undefined}
-							<h4 class="text-center alert my-3">Carregando partidas...</h4>
+							<div class="text-center my-3">
+								<div class="spinner-border" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+							</div>
 						{:else if $matchesStore == ''}
 							<h4 class="text-center alert my-3">Nenhuma partida em adamento!</h4>
 						{:else}
@@ -319,10 +331,10 @@ async function notify(){
 	</section>
 </section>
 
-	<Report />
-	<Config />
-	<Player player={rankingPlayer} />
-	<Ranking rankings={oldRankings}/>
+	<Report fetchURL={fetchURL}/>
+	<Config fetchURL={fetchURL}/>
+	<Player player={rankingPlayer}/>
+	<Ranking rankings={oldRankings} loading={loading}/>
 	<History historic={matchesHistory} timeRes={timeResult}/>
 
 
