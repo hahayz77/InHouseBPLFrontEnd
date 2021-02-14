@@ -28,7 +28,6 @@
 	})		
 
 	let error, status;
-	let input = 'player1';
 	let queuePlayers;
 	let reportMatch, reportResult;
 	let reportRes;
@@ -169,23 +168,6 @@ async function notify(){
 
 	async function outQueue(){
 		socket.emit('queueDelete', $userStore.id || $userStore._id);
-	}
-
-	async function enterQueueINPUT(){
-		await update();
-		if ($matchesStore[0] === undefined){
-			socket.emit('queueUpdate', input)
-		}
-		else{
-			var letQueue = $matchesStore[0].teams.indexOf($userStore.name);
-			if( letQueue === -1){
-				socket.emit('queueUpdate', input)
-			}
-			else{
-			error = "Você tem uma partida para finalizar!";
-			await setTimeout(() => {error = undefined}, 3000);
-			}
-		}
 	}
 
 	// ########################################   REPORT
@@ -335,18 +317,6 @@ async function notify(){
 			</div>
 		</div>
 	</section>
-</section>
-
-<section class="container jumbotron">
-	<div class="row">
-		<div class="col-12">
-			<form on:submit|preventDefault={enterQueueINPUT}>
-				<input type="text" bind:value={input}>
-				<input type="submit" class="btn btn-primary">
-				<p>{input}</p>
-			</form>
-		</div>
-	</div>
 </section>
 
 	<Report />
