@@ -21,11 +21,7 @@
 	import History from '../components/History.svelte';
 
 	// const fetchURL = "http://localhost:8081";
-<<<<<<< HEAD
-	const fetchURL = "https://in-house-bpl-test.herokuapp.com";
-=======
 	const fetchURL = "https://projeto.br-rgt.net/";
->>>>>>> TestServer
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']

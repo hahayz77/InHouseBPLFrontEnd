@@ -13,13 +13,8 @@
     let rankingTitle = "";
     let selectedPlayer;
     
-<<<<<<< HEAD
-    let fetchURL = "https://in-house-bpl-test.herokuapp.com";
-    // let fetchURL = "https://app-inhouseleagueblp.herokuapp.com";
-=======
     // let fetchURL = "http://localhost:8081";
     let fetchURL = "https://projeto.br-rgt.net/";
->>>>>>> TestServer
     
     let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0
