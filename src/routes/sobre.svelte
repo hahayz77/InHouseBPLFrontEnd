@@ -1,8 +1,13 @@
+<script>
+	import { slide } from 'svelte/transition';
+
+</script>
+
 <svelte:head>
 	<title>Sobre</title>
 </svelte:head>
 
-<section class="container jumbotron">
+<section transition:slide class="container jumbotron">
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">

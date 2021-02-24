@@ -1,4 +1,5 @@
 <script>
+	import { slide } from 'svelte/transition';
 	import Hero from '../components/Hero.svelte'
 
 </script>
@@ -15,7 +16,7 @@
 		<div class="transition"></div>
 	</section>
 
-	<section class="container jumbotron">
+	<section transition:slide class="container jumbotron">
 		<div class="row">
 		<div class="col-12">
 			<img id="comunidadeImg" src="home/comunidade.png" alt="Comunidade Battlerite">
@@ -26,7 +27,14 @@
 					<p>Após sucessivos problemas com o jogo, além de quedas bruscas no número de players, os pouscos que restaram 
 					estão tentando fazer o que podem para criar uma comunidade unida e acolhedora.</p>
 					<p>Junte-se a nós nessa caminhada para manter o melhor jogo de todos, <b>#Battlerite4Ever ♥.</b></p>
-					<p> Entre no nosso  <a href="http://discord.gg/bbFyk4d" target="_blank"><i class="fab fa-discord"></i> Discord</a>  e <a href="https://chat.whatsapp.com/FJsUz9C9Q973arux32rVfq" target="_blank"><i class="fab fa-whatsapp"></i> Whatsapp</a> para somarmos forças.</p>
+				</div>
+				<div class="row justify-content-around">
+					<div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
+						<a href="http://discord.gg/bbFyk4d" target="_blank"><button class="btn btn-discord rounded-pill"><i class="fab fa-discord px-2"></i> Discord </button></a>
+					</div>
+					<div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">
+						<a href="https://chat.whatsapp.com/FJsUz9C9Q973arux32rVfq" target="_blank"><button class="btn btn-whatsapp rounded-pill"><i class="fab fa-whatsapp px-2"></i> Whatsapp </button></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -38,6 +46,7 @@
 		}
 		i{
 			font-size: 1.5rem;
+			vertical-align: middle;
 		}
 		.transition{
 			height: 100px;
@@ -49,5 +58,31 @@
 			object-fit: contain;
 			margin-top: -100px;
 			margin-bottom: 3rem;
+		}
+		.btn{
+			transition: all 400ms;
+		}
+		.btn-discord{
+			background-color: #7289da;
+		}
+		.btn-whatsapp{
+			background-color: #1ebea5;
+		}
+		.btn-whatsapp, .btn-discord{
+			padding: .8rem 2rem;
+			color: white;
+			margin: 2rem 0;
+		}
+		.btn:hover{
+			transition: all 600ms;
+			transform: scale(1.05);
+			text-decoration: none;
+		}
+
+		@media (max-width: 768px) {
+			
+			.btn-whatsapp, .btn-discord{
+				margin: 1rem 0;
+			}	
 		}
 	</style>
