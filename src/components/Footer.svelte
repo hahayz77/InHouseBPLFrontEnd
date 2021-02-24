@@ -8,7 +8,7 @@
             <a href="https://chat.whatsapp.com/FJsUz9C9Q973arux32rVfq" target="_blank" class="mx-2"><i class="fab fa-whatsapp"></i></a>
         </div>
         <div class="row d-flex justify-content-center">
-                <p class="text-center"><a href="/">Home</a> | <a href="/sobre">Sobre</a> | <a href="/builds">Builds</a> | <a href="/user">InHouse</a>
+                <p class="text-center"><a href="/">Home</a> | <a href="/sobre">Sobre</a> | <a href="/guia">Guia</a> | <a href="/builds">Builds</a> | <a href="/user">InHouse</a>
         </div>
         <div class="row d-flex justify-content-center">
                 <p class="text-center">Comunity Site | Site da Comunidade</p>
@@ -28,6 +28,11 @@
     }
     a{
         color: black;
+        transition: all 400ms;
+    }
+    a:hover{
+        transform: scale(1.05);
+        transition: all 600ms;
     }
     .jumbotron{
         margin-bottom: 0;
