@@ -3,42 +3,8 @@
 </script>
 
 <section transition:slide id="hero" class="container-fluid bg-grad">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./hero/hero1.jpg" class="w-100" alt="Battlerite Reborn">
-      <div class="carousel-caption d-block">
-        <h1>Battlerite Reborn</h1>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./hero/hero2.jpg" class="w-100" alt="Pobre League Brasil">
-      <div class="carousel-caption d-block">
-        <h1>Pobre League Brasil</h1>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./hero/hero3.png" class="w-100" alt="Last Update">
-      <div class="carousel-caption d-block">
-        <h1>Last Update</h1>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
+    <img id="logoHero" src="home/logoHero.png" alt="Battlerite Brasil">
+    <img id="heroimg" src="home/hero.jpg" alt="Battlerite Brasil">
 </section>
 
 <style>
@@ -47,29 +13,58 @@
       width: 100%;
       height: 90vh;
       background: #000;
-      }
-  img{
-      -webkit-mask-image: linear-gradient(to top, transparent, #cecece 25%);
-      mask-image: linear-gradient(to top, transparent, #cecece 25%);
-      height: 90vh;
-      object-fit: cover;
+      overflow: hidden;
   }
+  #logoHero{
+    z-index: 1;
+    position: absolute;
+    top: 25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    object-fit: contain;
+    max-height: 80%;
+    
+  }
+  #heroimg {
+    z-index: -1;
+    object-fit: cover;
+    height: 90vh;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to top, transparent, #000000 50%);
+    mask-image: linear-gradient(to top, transparent, #000000 50%);
+    object-fit: cover;
+    animation: heroanimateframes 30s infinite;
+  }
+
   @keyframes heroanimateframes {
       0% {
           transform: scale(1);
       }
-      100% {
+      50% {
           transform: scale(1.1,1.1);
       }
-  }
-  .carousel-item img {
-      animation: heroanimateframes 30s infinite ;
+      100% {
+          transform: scale(1);
+      }
   }
 
   @media (max-width: 575.98px) { 
+    #logoHero{
+      height: 90vw;
+      
+    }
     #hero, img {
       max-height: 90vh;
     }
 
+   }
+   @media(max-width: 767.98px){
+     #logoHero{
+       object-fit: cover;
+     }
    }
 </style>

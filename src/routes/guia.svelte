@@ -1,13 +1,19 @@
+<script>
+	import { slide } from 'svelte/transition';
+
+</script>
+
 <svelte:head>
 	<title>Guia</title>
 </svelte:head>
 
-<section class="container jumbotron">
+<section transtion:slide class="container jumbotron">
 	<div class="row">
-		<div class="col">
+		<div class="col-12">
 			<div class="jumbotron">
 				<h1 class="text-center">Guia InHouse Reborn</h1>
 			</div>
+			<img id="guiaImg" src="imgs/guia.png" alt="Guia InHouse">
 			<div class="accordion" id="accordionExample">
 				<div class="card">
 					<div class="card-header" id="headingOne">
@@ -70,6 +76,9 @@
 							Se o time A tiver mais pontos do que o time B e A ganhar de B então A ganhará menos pontos. Sendo assim, o time com menor "peso" sempre ganhara mais pontos do que o time com maior "peso". <br>
 							Jogadores com pontos negativos tem redução na penalidade em 5 pontos sempre que perderem.<br>
 							
+							<br><b>Mapas</b><br>
+							Os mapas gerados aleatoriamente não são obrigatórios para a partida.<br>
+
 							<br><b>Logout</b><br>
 							Clicando em <i class="fas fa-cog text-dark"></i> e logo em seguida no botão <button type="button" class="btn btn-danger">Log Out</button> <br>
 
@@ -146,7 +155,7 @@
 						Bem abaixo, na janela de Reportar Resultado, estarão os resultados já reportados por cada time. <br>
 
 						<br><b>Problemas antes ou durante a partida</b><br>
-						Caso haja algum problema você pode cancelar toda a partida escolhendo a opção em amarelo na área "Reportar Problema". Lembrando que esta opção exclui a partida por completo sem nenhuma punição para os participantes. <br>
+						Caso haja algum problema <strong>você e mais algum outro jogador, qualquer um, pode cancelar a partida escolhendo qualquer opção em amarelo na área "Reportar Problema"</strong>. Lembrando que esta opção exclui a partida por completo sem nenhuma punição para os participantes. <br>
 						Com o <a href={""} data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">uso inadequado</a> do cancelamento das partidas o player responsável poderá ser banido.<br>
 						</div>
 					</div>
@@ -172,7 +181,12 @@
 		border-radius: 25px;
 		padding: .2rem .4rem;
 	}
-	
+	#guiaImg{
+		max-width: 100%;
+		object-fit: contain;
+		margin-top: -80px;
+		margin-bottom: 2rem;
+	}	
 	@media(max-width: 767.98px){
 		.inputResult{
 		width: 30%;
