@@ -1,17 +1,13 @@
-<script>
-	import { slide } from 'svelte/transition';
-
-</script>
 
 <svelte:head>
 	<title>Guia</title>
 </svelte:head>
 
-<section transtion:slide class="container jumbotron">
+<section class="container jumbotron">
 	<div class="row">
 		<div class="col-12">
 			<div class="jumbotron">
-				<h1 class="text-center">Guia InHouse Reborn</h1>
+				<h2 class="text-center">Guia InHouse Reborn</h2>
 			</div>
 			<img id="guiaImg" src="imgs/guia.png" alt="Guia InHouse">
 			<div class="accordion" id="accordionExample">
@@ -192,5 +188,9 @@
 		width: 30%;
 		}
 	}
-
+	@media(max-width: 425px){
+		#guiaImg{
+			margin-top: -30px;
+		}
+	}
 </style>

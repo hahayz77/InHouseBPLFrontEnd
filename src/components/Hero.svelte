@@ -1,9 +1,7 @@
-<script>
-  import { slide } from 'svelte/transition'
-</script>
 
-<section transition:slide id="hero" class="container-fluid bg-grad">
-    <img id="logoHero" src="home/logoHero.png" alt="Battlerite Brasil">
+<section id="hero" class="container-fluid bg-grad">
+    <img id="logoHero" src="home/logoHero.png" alt="Battlerite Brasil" 
+    data-aos="fade-in" data-aos-delay="800" data-aos-easing="ease-out">
     <img id="heroimg" src="home/hero.jpg" alt="Battlerite Brasil">
 </section>
 
@@ -12,8 +10,8 @@
       display: table;
       width: 100%;
       height: 90vh;
-      background: #000;
       overflow: hidden;
+      background: white;
   }
   #logoHero{
     z-index: 1;
@@ -34,8 +32,8 @@
     object-fit: cover;
     height: 90vh;
     width: 100%;
-    -webkit-mask-image: linear-gradient(to top, transparent, #000000 50%);
-    mask-image: linear-gradient(to top, transparent, #000000 50%);
+    -webkit-mask-image: linear-gradient(to top, transparent, #ffffff 30%);
+    mask-image: linear-gradient(to top, transparent, #ffffff 30%);
     object-fit: cover;
     animation: heroanimateframes 30s infinite;
   }

@@ -1,7 +1,6 @@
 <script>
 	import { goto } from '@sapper/app';
 	import { onMount } from 'svelte';
-	import { slide } from 'svelte/transition';
 
 	import Nav from '../components/Nav.svelte';
 	import Footer from '../components/Footer.svelte';
@@ -42,7 +41,7 @@
 			<source src="video.webm" type="video/webm">
 		</video>
 	
-	<main transition:slide class="overflow-hidden">
+	<main class="overflow-hidden">
 		<slot></slot>
 	</main>
 

@@ -1,13 +1,9 @@
-<script>
-	import { slide } from 'svelte/transition';
-
-</script>
 
 <svelte:head>
 	<title>Sobre</title>
 </svelte:head>
 
-<section transition:slide class="container jumbotron">
+<section class="container jumbotron">
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">
@@ -50,5 +46,31 @@
 		height: 50px;
 		padding: 2px;
 	}
-
+	@media(max-width: 768px){
+		#proImg{
+			margin: 0;
+		}
+		ul{
+			padding-left: 0;
+		}
+		li img{
+			height: 40px;
+		}
+	}
+	@media(max-width: 320px){
+		li{
+			font-size: 12px;
+		}
+		li img{
+			height: 30px;
+		}
+	}
+	@media(max-width: 425px){
+		li{
+			font-size: 14px;
+		}
+		#proImg{
+			margin-top: -30px;
+		}
+	}
 </style>

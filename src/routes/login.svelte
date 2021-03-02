@@ -1,8 +1,6 @@
 <script>
 	import { goto } from '@sapper/app';
 	import { userStore } from '../stores/userStore'
-
-	import { slide } from 'svelte/transition';
 	
 	// SEM "/" NO FINAL
 	// let fetchURL = "http://localhost:8081";
@@ -106,7 +104,7 @@
 </svelte:head>
 
 {#if newuser === 0}
-<section transition:slide class="container jumbotron">
+<section class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -145,7 +143,7 @@
 	</div>
 </section>
 {:else}
-	<section transition:slide class="container jumbotron">
+	<section class="container jumbotron">
 	<div class="container h-100 mt-5">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
