@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">
-            <h1 class="text-center">Sobre</h1>
+            <h1 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">Sobre</h1>
           </div>
         </div>
-		<img id="proImg" src="imgs/pro.png" alt="Contribuidores">
-		<div class="col-12">
+		<img id="proImg" src="imgs/pro.png" alt="Contribuidores" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">
+		<div class="col-12" data-aos="fade-in" data-aos-delay="300" data-aos-easing="ease-out">
 			<p>Foram idealizadores do projeto e ajudaram com toda boa vontade e filantropia os que vão ficar na história desse jogo e de seus poucos players que restaram....</p>
 			<ul>
 				<li> <img src="champions/Ezmo.jpg" class="rounded-pill" alt=""> Crosleft "O Ezmo do Matchmaking"</li>
@@ -46,7 +46,7 @@
 		height: 50px;
 		padding: 2px;
 	}
-	@media(max-width: 768px){
+	@media (max-width: 767.98px) {
 		#proImg{
 			margin: 0;
 		}
@@ -57,7 +57,10 @@
 			height: 40px;
 		}
 	}
-	@media(max-width: 320px){
+	@media (min-width: 576px) and (max-width: 767.98px) {
+		#proImg{
+			margin-top: -30px;
+		}
 		li{
 			font-size: 12px;
 		}
@@ -65,9 +68,9 @@
 			height: 30px;
 		}
 	}
-	@media(max-width: 425px){
+	@media (max-width: 575.98px){
 		li{
-			font-size: 14px;
+			font-size: 12px;
 		}
 		#proImg{
 			margin-top: -30px;

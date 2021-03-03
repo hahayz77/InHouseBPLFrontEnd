@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">
-            <h1 class="text-center">Em construção....</h1>
+            <h1 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">Em construção....</h1>
           </div>
-          <img id="buildsImg" src="imgs/builds.png" alt="">
+          <img id="buildsImg" src="imgs/builds.png" alt="" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">
         </div>
     </div>
 

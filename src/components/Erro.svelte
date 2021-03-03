@@ -1,9 +1,8 @@
 <script>
-  import { fade } from 'svelte/transition';
   export let error; 
 </script>
 
-<div transition:fade class="alert alert-danger p-3 mx-auto my-0" role="alert">
+<div class="alert alert-danger p-3 mx-auto my-0" role="alert">
 <i class="fa fa-ban"></i><span class="d-inline">{error}</span>
 </div>
 

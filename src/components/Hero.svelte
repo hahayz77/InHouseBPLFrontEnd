@@ -1,7 +1,7 @@
 
 <section id="hero" class="container-fluid bg-grad">
     <img id="logoHero" src="home/logoHero.png" alt="Battlerite Brasil" 
-    data-aos="fade-in" data-aos-delay="800" data-aos-easing="ease-out">
+    data-aos="fade-in" data-aos-delay="800" data-aos-easing="ease-in-out">
     <img id="heroimg" src="home/hero.jpg" alt="Battlerite Brasil">
 </section>
 

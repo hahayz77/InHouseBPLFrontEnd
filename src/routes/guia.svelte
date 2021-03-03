@@ -7,11 +7,12 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="jumbotron">
-				<h2 class="text-center">Guia InHouse Reborn</h2>
+				<h2 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">Guia InHouse Reborn</h2>
 			</div>
-			<img id="guiaImg" src="imgs/guia.png" alt="Guia InHouse">
+			<img id="guiaImg" src="imgs/guia.png" alt="Guia InHouse" 
+			data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">
 			<div class="accordion" id="accordionExample">
-				<div class="card">
+				<div class="card" data-aos="fade-in" data-aos-delay="400" data-aos-easing="ease-out">
 					<div class="card-header" id="headingOne">
 					<h2 class="mb-0">
 						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
