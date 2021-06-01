@@ -24,7 +24,7 @@
 			<div class="col-12">
 			<h1 class="text-center" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">UM JOGO NÃO É NADA SEM A SUA COMUNIDADE!</h1>
 				<div class="jumbotron py-0" data-aos="fade-up" data-aos-delay="300" data-aos-easing="ease-out">
-					<p>Após sucessivos problemas com o jogo, além de quedas bruscas no número de players, os pouscos que restaram 
+					<p>Após sucessivos problemas com o jogo, além de quedas bruscas no número de players, os poucos que restaram 
 					estão tentando fazer o que podem para criar uma comunidade unida e acolhedora.</p>
 					<p>Junte-se a nós nessa caminhada para manter o melhor jogo de todos, <b>#Battlerite4Ever ♥.</b></p>
 				</div>

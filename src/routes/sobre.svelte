@@ -16,7 +16,7 @@
 			<ul>
 				<li> <img src="champions/Ezmo.jpg" class="rounded-pill" alt=""> Crosleft "O Ezmo do Matchmaking"</li>
 				<li> <img src="champions/Zander.jpg" class="rounded-pill" alt=""> Dward0 "O Melhor Streamer de Battlerite"</li>
-				<li> <img src="champions/Freya.jpg" class="rounded-pill" alt=""> Fuzarker "O Programado e Coach Freya"</li>
+				<li> <img src="champions/Freya.jpg" class="rounded-pill" alt=""> Fuzarker "O Programador e Coach Freya"</li>
 				<li> <img src="champions/Poloma.jpg" class="rounded-pill" alt=""> Ivanbi "O Poloma do Whatsapp"</li>
 				<li> <img src="champions/Croak.jpg" class="rounded-pill" alt=""> Lreo "O ex-Sapo Cyberpunk"</li>
 				<li> <img src="champions/Sirius.jpg" class="rounded-pill" alt=""> Surianda "O Prodígio ex-Main Sirius"</li>
