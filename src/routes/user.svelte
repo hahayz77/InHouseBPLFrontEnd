@@ -48,15 +48,6 @@
 		}
 		else{
 			await update();
-			if ($userStore.name !== "none"){
-				if($userStore.wins !== 0 || $userStore.loses !== 0){
-					winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
-					winrate = parseFloat(winrate.toFixed(1));
-				} else{
-					winrate = 0;
-				}
-			
-			}
 		}
 	})
 
@@ -77,13 +68,22 @@ async function notify(){
 
 	async function update(){
     try {
-      const fetchUpdate = await fetch(fetchURL + "/match/update/" + $userStore.name )
-      const result = await fetchUpdate.json();
-      matchesStore.update(listaAtual => { return result.matches })
-	  userStore.update(listaAtual => { return result.user })
-	  ranking();
+		const fetchUpdate = await fetch(fetchURL + "/match/update/" + $userStore.name )
+		const result = await fetchUpdate.json();
+		matchesStore.update(listaAtual => { return result.matches });
+		userStore.update(listaAtual => { return result.user });
+		if ($userStore.name !== "none"){
+			if($userStore.wins !== 0 || $userStore.loses !== 0){
+				winrate = ($userStore.wins / ($userStore.wins + $userStore.loses)) * 100;
+				winrate = parseFloat(winrate.toFixed(1));
+			} else{
+				winrate = 0;
+			}
+			
+		}
+		ranking();
     } catch (error) {
-      console.log(error);
+      	console.log(error);
     }
   }
 
