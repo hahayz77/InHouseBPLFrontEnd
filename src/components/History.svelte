@@ -69,13 +69,11 @@
     }
     .infos{
         border-top: 1px solid #721c24;
-        border-bottom: 1px solid #721c24;
         border-radius: 5px;
-        background-color: #f8d7dab2;
     }
     .infos span{
         font-size: 1rem;
-        color: #721c24;
+        color: white;
 
     }
     .player{
@@ -85,6 +83,11 @@
         overflow: hidden;
         margin: 2px auto;
         border-radius: 10px;
+    }
+    .alert-danger{
+        color: #ffffff;
+        background-color: #9a97a9;
+        border-radius: 10px 0 10px 0;
     }
     @media (max-width: 767.98px) { 
         .result{

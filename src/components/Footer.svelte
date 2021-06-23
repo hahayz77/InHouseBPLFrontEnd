@@ -42,6 +42,9 @@
     i{
         font-size: 2.5rem;
     }
+    p{
+        color: rgb(50, 50, 50);
+    }
 
     @media(max-width: 767.98px){
         img{

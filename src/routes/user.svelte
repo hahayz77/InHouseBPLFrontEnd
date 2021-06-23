@@ -21,8 +21,8 @@
 	import History from '../components/History.svelte';
 
 	// SEM "/" NO FINAL
-	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://projeto.br-rgt.net";
+	const fetchURL = "http://localhost:8081";
+	// const fetchURL = "https://projeto.br-rgt.net";
 	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
 
 	const socket = io(fetchURL, {
@@ -240,14 +240,14 @@ async function notify(){
 	<div class="row">
 		<div class="col-12 col-sm-6 col-md-6 px-3 user">
 			<div class="card">
-				<div class="card-header"><h2>{$userStore.name} <a href={""} data-toggle="modal" data-target="#ModalConfig" class="float-right"><i class="fas fa-cog text-dark"></i></a></h2></div>
+				<div class="card-header"><h2>{$userStore.name} <a href={""} data-toggle="modal" data-target="#ModalConfig" class="float-right"><i class="icons fas fa-cog text-dark"></i></a></h2></div>
 				<div class="card-body">
 					<img class="d-block mr-auto rounded-pill py-3" src="/champions/{$userStore.main}.jpg" alt="">
-					<h4><i class="fas fa-award"></i> Pontos: {$userStore.points}</h4>
-					<h5><i class="fas fa-heart"></i> Main: {$userStore.main}</h5>	
-					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
-					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
-					<h5><i class="fas fa-percentage"></i> Winrate: {winrate}%</h5>
+					<h4><i class="icons fas fa-award"></i> Pontos: {$userStore.points}</h4>
+					<h5><i class="icons fas fa-heart"></i> Main: {$userStore.main}</h5>	
+					<h5><i class="icons fas fa-arrow-circle-up"></i> Vitórias: {$userStore.wins}</h5>
+					<h5><i class="icons fas fa-arrow-circle-down"></i> Derrotas: {$userStore.loses}</h5>
+					<h5><i class="icons fas fa-percentage"></i> Winrate: {winrate}%</h5>
 					{#if pressed === false}
 						<button type="button" on:click={enterQueue} class="btn btn-success"><i class="fas fa-play"></i> Entrar na fila</button>
 					{:else}
@@ -260,7 +260,7 @@ async function notify(){
 		</div>
 		<div class="col-12 col-sm-6 col-md-6 px-3 ranking">
 			<div class="card">
-				<div class="card-header"><h3>RANKING <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="fas fa-trophy text-dark"></i></a></h3></div>
+				<div class="card-header"><h3>RANKING <a href={""} on:click={oldRankingsClick} data-toggle="modal" data-target="#ModalRanking" class="float-right"><i class="icons fas fa-trophy text-dark"></i></a></h3></div>
 				<div class="card-body">
 					{#each rankingUsers as {name, main, points, wins, loses}, id}
 					<div class="item-ranking">
@@ -269,7 +269,7 @@ async function notify(){
 							<img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
 							<span class="name">{name}</span>
 						</a>
-						<span class="points float-right">{points}</span>
+						<!-- <span class="points float-right">{points}</span> -->
 					</div>
 					<hr class="my-0 mx-3">
 					{/each}
@@ -294,9 +294,9 @@ async function notify(){
 						{:else if queuePlayers == ""}
 							<h4 class="text-center alert my-3">Nenhum player aguardando na fila!</h4>
 						{:else}
-							<ul class="list-group col-12 col-sm-10 col-md-8 mx-auto">
+							<ul class="list-group col-12 col-sm-10 col-md-8 d-flex flex-row mx-auto justify-content-center">
 								{#each queuePlayers as player, id}
-									<li class='text-center list-group-item list-item-{id%2 === 0 ? "primary" : "secondary"}'><h4>{player.name}</h4></li>			
+									<li class='text-center list-group-item list-item-{id%2 === 0 ? "primary" : "secondary"}'><h4>{id+1}</h4></li>			
 								{/each}
 							</ul>
 						{/if}
@@ -310,7 +310,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card match">
 					<div class="card-header">
-						<h3>PARTIDAS <a href={""} on:click={getHistoric} data-toggle="modal" data-target="#ModalHistory" class="float-right"><i class="fas fa-history text-dark"></i></a></h3>
+						<h3>PARTIDAS <a href={""} on:click={getHistoric} data-toggle="modal" data-target="#ModalHistory" class="float-right"><i class="incons fas fa-history text-dark"></i></a></h3>
 					</div>
 					<div class="card-body">
 						{#if $matchesStore === undefined}
@@ -370,7 +370,8 @@ async function notify(){
 	}
 	.list-group-item{
 		padding: 0.5rem 1rem;
-		border: none;
+		border: 1px solid rgb(255, 150, 125);
+		width: 15%;
 	}
 	.ranking .card .card-body{
 		max-height: 470px;
@@ -406,9 +407,6 @@ async function notify(){
 		.item-ranking img{
 			height: 35px;
 		}
-		.item-ranking .points{
-			line-height: 2;
-		}
 		.col-12{
 			padding-right: 0;
 			padding-left: 0;
@@ -423,6 +421,27 @@ async function notify(){
 		.item-ranking span{
 		line-height: 2rem;
 		}
+	}
+
+	h3, h2, i{
+		color: rgb(255, 125, 75);
+	}
+	span, h4, h5{
+		color: rgba(255, 255, 255, 0.8);
+	}
+	.icons{
+		color:  rgb(255, 125, 75);
+	}
+	.fa-cog:before, .fa-trophy:before, .fa-history:before{
+		color: rgb(243, 138, 52);
+	}
+	.card{
+		box-shadow: 0 4px 8px 0 rgba(255, 81, 81, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border: 1px solid rgb(255, 125, 75);
+	}
+	.card-header{
+		background-color: rgba(0,0,0,.2);
+    	border-bottom: 1px solid rgb(255, 125, 75);
 	}
 
 </style>

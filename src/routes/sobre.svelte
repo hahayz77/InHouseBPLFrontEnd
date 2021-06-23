@@ -24,10 +24,10 @@
 				<li> <img src="champions/Ruh-Kaan.jpg" class="rounded-pill" alt=""> Vinicineo "O Ruh Kahn Rapper"</li>
 				<li> <img src="champions/Jumong.jpg" class="rounded-pill" alt=""> Yasuda "O Coach Jumong Japonês"</li>
 				<li> <img src="champions/Ulric.jpg" class="rounded-pill" alt=""> Zartola "O Ulric das Planilhas"</li>
-				E eu....<br>
+				<p>E eu....</p>
 				<li> <img src="champions/Pestilus.jpg" class="rounded-pill" alt=""> HaHayz77 "O Ex-Pestilous ainda Lagado"</li>
 			</ul>
- 			Agradeço a todos pela força! #Battlerite4Ever ♥
+ 			<p>Agradeço a todos pela força! #Battlerite4Ever ♥</p>
 		</div>
     </div>
 </section>
@@ -41,6 +41,7 @@
 	}
 	li{
 		list-style-type: none;
+		color: white;
 	}
 	li img{
 		height: 50px;

@@ -14,7 +14,7 @@
       </div>
       <div class="modal-body">
         <img class="d-block mr-auto rounded-pill py-3" src="/champions/{player.main}.jpg" alt="">
-					<h4><i class="fas fa-award"></i> Pontos: {player.points}</h4>
+					<!-- <h4><i class="fas fa-award"></i> Pontos: {player.points}</h4> -->
 					<h5><i class="fas fa-heart"></i> Main: {player.main}</h5>	
 					<h5><i class="fas fa-arrow-circle-up"></i> Vitórias: {player.wins}</h5>
 					<h5><i class="fas fa-arrow-circle-down"></i> Derrotas: {player.loses}</h5>

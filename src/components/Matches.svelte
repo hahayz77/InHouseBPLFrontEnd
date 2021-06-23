@@ -33,7 +33,7 @@
             
             <div class="col-2 alert-danger ">
                 <div class="row">
-                    <span class="result col-12 text-center">{match.result[0]} x {match.result[1]}</span>
+                    <span class="result col-12 text-center"> X </span>
                 </div>
                 <div class="row">
                     <span class="report col-12 text-center">{match.reported === "false" ? "" : "Partida Reportada!" }</span>
@@ -59,30 +59,34 @@
         padding: auto 5px;
         font-size: 1rem;
         border-radius: 5px;
-        border-top: 1px solid blueviolet;
-        border-bottom: 1px solid blueviolet;
+        border-top: 1px solid #ffe69b;
+        border-bottom: 1px solid #ffe69b;
     }
     .result{
         font-size: 2rem;
     }
     .infos{
-        border-top: 1px solid #721c24;
-        border-bottom: 1px solid #721c24;
+        border-top: 1px solid #ffe69b;
         border-radius: 5px;
-        background-color: #f8d7dab2;
     }
     .infos span{
         font-size: 1rem;
-        color: #721c24;
+        color: #ffe69b;
 
     }
     .player{
-        background: rgba(167, 152, 255, 0.7);
+        color: rgb(43, 43, 43);
+        background: #f38a34;
         font-size: 1.2rem;
         padding: auto 1rem;
         overflow: hidden;
         margin: 2px auto;
         border-radius: 10px;
+    }
+    .alert-danger{
+        color: #692c00;
+        background-color: #ffe69b;
+        border-radius: 10px 0 10px 0;
     }
     @media (max-width: 767.98px) { 
         .result{
