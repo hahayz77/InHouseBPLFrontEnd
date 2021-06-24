@@ -1,7 +1,7 @@
 # InHouse Battlerite League 0.2
 
 ## Para fazer
-- [ ] Histórico de Partidas;
+- [x] Histórico de Partidas;
 - [ ] Histórico de Reports;
 - [x] Delay para botão Entrar na fila;
 - [x] Perfil no ranking;

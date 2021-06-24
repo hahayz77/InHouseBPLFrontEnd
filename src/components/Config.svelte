@@ -1,57 +1,60 @@
 <script>
-  import { goto } from '@sapper/app';
+   import { goto } from '@sapper/app';
 
-  import { matchesStore } from '../stores/matchesStore';
-	import { userStore } from '../stores/userStore';
+   import { matchesStore } from '../stores/matchesStore';
+   import { userStore } from '../stores/userStore';
 	import { reportStore } from '../stores/reportStore';
-  import { rankingStore } from '../stores/rankingStore';
+   import { rankingStore } from '../stores/rankingStore';
 
-    let main = "Jade";
-    let statusresponse;
-    
-    export let fetchURL;
-    
-    let offUser = {
+   let main = "Jade";
+   let statusresponse;
+   
+   export let fetchURL;
+   
+   let offUser = {
       menssagem: '', email: '', id: '', _id: '', name: 'none', main: 'Raigon', points: 0, wins: 0, loses: 0
-    }
+   }
 
-    let offReport = {
-    status: "",
-    mensagem: "",
-    id: "",
-    teams: [0,0,0,0,0,0],
-    reported: "",
-    preresult: {
-        teama: "",
-        teamb: ""
-    } 
+   let offReport = {
+      status: "",
+      mensagem: "",
+      id: "",
+      teams: [0,0,0,0,0,0],
+      reported: "",
+      preresult: {
+         teama: "",
+         teamb: ""
+   } 
 }
 
-    async function mainChar(){
-        let userId =  await $userStore._id;
-        const fetchUpdate = await fetch( fetchURL + "/user/main/" + userId + "/" + main)
-        const result = await fetchUpdate.json();
-        statusresponse = result.status;
-        if(statusresponse === "mainchampionok"){
-            $userStore.main = main;
-            alert("Main alterado com sucesso!");
-            return;
-        }
-        else{
-            alert("Erro ao alterar main!");
-        }
-    }
-    async function logOff(){
-        let selected = confirm("Tem certeza que deseja sair?");
-        if(selected === true){
-          userStore.update(listaAtual => { return offUser });
-          reportStore.update(listaAtual => { return offReport });
-          matchesStore.update(listaAtual => {return undefined});
-          rankingStore.update(listaAtual => {return undefined});
-          localStorage.removeItem('userStore');
-          location.reload();
-        }
-    }
+   async function mainChar(){
+      let userId =  await $userStore._id;
+      const fetchUpdate = await fetch( fetchURL + "/user/main/" + userId + "/" + main)
+      const result = await fetchUpdate.json();
+      statusresponse = result.status;
+      if(statusresponse === "mainchampionok"){
+         $userStore.main = main;
+         alert("Main alterado com sucesso!");
+         return;
+      }
+      else{
+         alert("Erro ao alterar main!");
+      }
+   }
+   async function logOff(){
+      let selected = confirm("Tem certeza que deseja sair?");
+      if(selected === true){
+         userStore.update(listaAtual => { return offUser });
+         reportStore.update(listaAtual => { return offReport });
+         matchesStore.update(listaAtual => {return undefined});
+         rankingStore.update(listaAtual => {return undefined});
+         localStorage.removeItem('userStore');
+         location.reload();
+      }
+   }
+   async function gameMode(){
+      alert("OK");
+   }
 </script>
 
 <div class="modal fade" id="ModalConfig" tabindex="-1" role="dialog" aria-labelledby="ModalConfigLabel" aria-hidden="true">
@@ -64,7 +67,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <h4>Selecione o seu Campeão:</h4>
+        <h5>Selecione o seu Main:</h5><br>
         <select class="form-control" bind:value={main}>
             <option value="Alysia">Alysia</option>
             <option value="Ashka">Ashka</option>
@@ -95,11 +98,34 @@
             <option value="Varesh">Varesh</option>
             <option value="Zander">Zander</option>
         </select>
-        <button type="button" class="btn btn-primary my-3" on:click={mainChar}><i class="fas fa-check"></i> Salvar Mudanças</button>
-      </div>
+        <button type="button" class="btn btn-primary my-3" on:click={mainChar}><i class="fas fa-check"></i> Salvar Main</button>
+        <!-- <hr>
+        <h5>Selecione o modo de jogo:</h5><br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Picks
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+          <label class="form-check-label" for="defaultCheck2">
+            Bans
+          </label>
+        </div>
+        <button type="button" class="btn btn-primary my-3" on:click={gameMode}><i class="fas fa-check"></i> Salvar Picks/Bans</button>-->
+      </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-danger mr-auto" on:click={logOff}><i class="fas fa-sign-out-alt"></i> Log Out</button>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+
+   /* hr{
+      background: white;
+   } */
+
+</style>

@@ -270,6 +270,7 @@ async function notify(){
 							<span class="name">{name}</span>
 						</a>
 						<!-- <span class="points float-right">{points}</span> -->
+						<div class="float-right"><img src="/ranking/{points}.png" alt="Tier Ranking"></div>
 					</div>
 					<hr class="my-0 mx-3">
 					{/each}
@@ -382,7 +383,7 @@ async function notify(){
 		font-size: 18px;
 	}
 	.item-ranking img{
-		height: 50px;
+		height: 55px;
 	}
 	.item-ranking a{
 		text-decoration: none;

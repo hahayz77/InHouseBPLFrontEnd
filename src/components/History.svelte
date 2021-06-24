@@ -68,7 +68,7 @@
         font-size: 2rem;
     }
     .infos{
-        border-top: 1px solid #721c24;
+        border-top: 1px solid #ffffff;
         border-radius: 5px;
     }
     .infos span{
