@@ -164,6 +164,9 @@
 </section>
 
 <style>
+	h2{
+		color: rgb(240, 211, 178);
+	}
 	.card{
 		background-color: #ffffffd7;
 	}

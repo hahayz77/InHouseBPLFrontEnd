@@ -55,7 +55,7 @@
 		.transition{
 			height: 100px;
 			width: 100%;
-			background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(0,0,0,0));
+			background: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0,0,0,0));
 		}
 		#comunidadeImg{
 			max-width: 100%;

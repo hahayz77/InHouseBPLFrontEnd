@@ -10,7 +10,12 @@ p{
 	color: rgba(216 191 163);
 }
 
-h1, h2, h3 {
+h1{
+	font-family: "Brickton Regular", 'Archivo Black', 'Tahoma', sans-serif;
+	color: rgb(240, 211, 178);
+}
+
+h2, h3 {
 	font-family: "Brickton Regular", 'Archivo Black', 'Tahoma', sans-serif;
 	color: rgb(255, 125, 75);
 }

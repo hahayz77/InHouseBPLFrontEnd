@@ -11,7 +11,7 @@
       width: 100%;
       height: 90vh;
       overflow: hidden;
-      background: white;
+      background: black;
   }
   #logoHero{
     z-index: 1;
