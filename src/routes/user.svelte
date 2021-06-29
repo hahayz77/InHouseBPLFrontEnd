@@ -283,7 +283,7 @@ async function notify(){
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3>FILA</h3>
+						<h3>FILA <a href="https://forms.gle/tThgJhtsEyMyvCgEA" target="_blank" class="float-right"><i class="icons fas fa-exclamation-circle text-dark"></i></a></h3>
 					</div>
 					<div class="card-body">
 						{#if queuePlayers == undefined}
