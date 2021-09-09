@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Builds</title>
+	<title>builds</title>
 </svelte:head>
 
 <section class="container jumbotron">

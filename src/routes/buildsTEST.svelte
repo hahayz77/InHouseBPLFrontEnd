@@ -85,7 +85,7 @@
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">
-            <h1 class="text-center">Builds</h1>
+            <h1 class="text-center">BUILDS</h1>
           </div>
           <img id="buildsImg" src="imgs/builds.png" alt="">
         </div>

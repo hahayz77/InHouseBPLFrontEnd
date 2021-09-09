@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="jumbotron">
-				<h2 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">Guia InHouse Reborn</h2>
+				<h2 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">GUIA INHOUSE REBORN</h2>
 			</div>
 			<img id="guiaImg" src="imgs/guia.png" alt="Guia InHouse" 
 			data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">

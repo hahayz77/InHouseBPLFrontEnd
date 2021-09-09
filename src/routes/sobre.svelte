@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
           <div class="jumbotron">
-            <h1 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">Sobre</h1>
+            <h1 class="text-center" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-out">SOBRE</h1>
           </div>
         </div>
 		<img id="proImg" src="imgs/pro.png" alt="Contribuidores" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-out">
