@@ -74,7 +74,6 @@
                     <span class="name">{name}</span>   
                 <span class="points float-right">{points}</span>
                 <div class="row align-items-center justify-content-around details">
-                  <span class="detailItem">Pontos: {points}</span>
                   <span class="detailItem">Vitórias: {wins}</span>
                   <span class="detailItem">Derrotas: {loses}</span>
                   <span class="detailItem">Winrate: {winRateCalculate(wins, loses)}%</span>
