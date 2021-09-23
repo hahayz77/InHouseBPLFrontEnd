@@ -36,6 +36,15 @@
         return rankingSelect = rankings[iRanking].ranking;        
     }
 
+    function winRateCalculate(wins, loses){
+      let winrate = 0;
+      if(wins !== 0 || loses !== 0){
+        winrate = (wins / (wins + loses)) * 100;
+				winrate = parseFloat(winrate.toFixed(1));
+      }
+      return winrate;
+    }
+
 </script>
 
 <div class="modal fade" id="ModalRanking" tabindex="-1" role="dialog" aria-labelledby="ModalRankingLabel" aria-hidden="true">
@@ -64,6 +73,12 @@
                     <img src="/champions/{main}.jpg" alt="{main}" class="rounded-pill">
                     <span class="name">{name}</span>   
                 <span class="points float-right">{points}</span>
+                <div class="row align-items-center justify-content-around details">
+                  <span class="detailItem">Pontos: {points}</span>
+                  <span class="detailItem">Vitórias: {wins}</span>
+                  <span class="detailItem">Derrotas: {loses}</span>
+                  <span class="detailItem">Winrate: {winRateCalculate(wins, loses)}%</span>
+                </div>
             </div>
             {/each}
             {:else}
@@ -86,12 +101,19 @@
 	.item-ranking{
 		margin: 1rem auto;
 		font-size: 18px;
+    border-top: 1px solid gray;
+    border-radius: 5px;
+    padding-top: 15px;
 	}
 	.item-ranking img{
 		height: 50px;
 	}
 	.item-ranking span{
 		line-height: 2.8rem;
+  }
+  .details{
+    font-size: 16px;
+    color: lightslategray;
   }
   @media (max-width: 767.98px) { 
 		.item-ranking .name{
@@ -104,7 +126,7 @@
 			line-height: 2;
 		}
 		.item-ranking span{
-		line-height: 2rem;
+		  line-height: 2rem;
 		}
 	}
 </style>
