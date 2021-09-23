@@ -128,5 +128,13 @@
 		.item-ranking span{
 		  line-height: 2rem;
 		}
+    .details{
+      font-size: 14px;
+    }
 	}
+  @media (max-width: 575.98px) { 
+    .details{
+      font-size: 10px;
+    }
+  }
 </style>
