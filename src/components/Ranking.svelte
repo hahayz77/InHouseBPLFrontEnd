@@ -132,7 +132,7 @@
       font-size: 14px;
     }
 	}
-  @media (max-width: 767.98px) { 
+  @media (max-width: 575.98px) { 
     .details{
       font-size: 10px;
     }
