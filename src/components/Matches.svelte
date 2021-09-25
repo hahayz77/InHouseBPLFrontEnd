@@ -1,8 +1,10 @@
 <script>
+	import Bans from '../components/Bans.svelte';
     import { matchesStore } from '../stores/matchesStore';
 	import { onMount } from 'svelte';
 
     var timeResult = [];
+    var matchBans = [];
 
     onMount(async () => {
 
@@ -22,7 +24,11 @@
                 <span>{match.randomMap} {timeResult[i]}</span>
             </div>
         </div>
-        <div class="row align-items-center justify-content-center mb-3">
+        <div class="row align-items-center justify-content-center">
+            <!-- <span class="btn btn-warning text-center mb-0 px-4 mx-3" on:click={()=> {matchBans = match.event.bans}} data-toggle="modal" data-target="#ModalBans"><i class="fas fa-chess-king"></i> PICKS </span> -->
+            <span class="btn btn-danger text-center mb-0 px-4 mx-3" on:click={()=> {matchBans = match.event.bans}} data-toggle="modal" data-target="#ModalBans"><i class="fas fa-ban"></i> BANS </span>
+        </div>
+        <div class="row align-items-center justify-content-center mb-3 mt-0">
             <div class="col-4">
                 <div class="players row text-center">
                     <span class="player col-12">{match.teams[0]}</span>
@@ -50,6 +56,9 @@
     {/each}
 
 </section>
+
+
+<Bans matchBans={matchBans}/>
 
 
 <style>
@@ -88,6 +97,15 @@
         background-color: #ffe69b;
         border-radius: 10px 0 10px 0;
     }
+    .btn{
+		border-radius: 25px;
+		margin-top: 0.8rem;
+		margin-bottom: 0.8rem;
+        font-size: 14px;
+	}
+    .btn i{
+        color: rgb(255, 125, 75);
+    }
     @media (max-width: 767.98px) { 
         .result{
             font-size: .9rem;
@@ -105,6 +123,10 @@
         }
         .infos span{
             font-size: .8rem;
+        }       
+        .btn {
+            font-size: 10px;
+            padding: 5px 0px;
         }
     }
     @media (min-width: 768px) and (max-width: 991.98px){

@@ -13,12 +13,12 @@
   	</button>
  	 <div class="collapse navbar-collapse" id="navbarText">
 		<ul class="navbar-nav ml-auto">
-			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-			<li><a aria-current="{segment === 'sobre' ? 'page' : undefined}" href="sobre">sobre</a></li>	
-			<li><a aria-current="{segment === 'guia' ? 'page' : undefined}" href="guia">guia</a></li>	
-			<li><a aria-current="{segment === 'builds' ? 'page' : undefined}" href="builds">builds</a></li>
+			<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">HOME</a></li>
+			<li><a aria-current="{segment === 'sobre' ? 'page' : undefined}" href="sobre">SOBRE</a></li>	
+			<li><a aria-current="{segment === 'guia' ? 'page' : undefined}" href="guia">GUIA</a></li>	
+			<li><a aria-current="{segment === 'builds' ? 'page' : undefined}" href="builds">BUILDS</a></li>
 			{#if $userStore.name === 'none'}
-				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">login</a></li>
+				<li><a aria-current="{segment === 'login' ? 'page' : undefined}" href="login">LOGIN</a></li>
 			{:else}
 				<li><a aria-current="{segment === 'user' ? 'page' : undefined}" href="user">{$userStore.name}</a></li>		
 			{/if}
