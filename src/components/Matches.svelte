@@ -1,7 +1,7 @@
 <script>
 	import Bans from '../components/Bans.svelte';
     import { matchesStore } from '../stores/matchesStore';
-	import { onMount } from 'svelte';
+	import { onMount } from 'svelte';	
 
     var timeResult = [];
     var matchBans = [];
@@ -15,6 +15,10 @@
         
     })
 
+    function picksMatch(picks){
+        goto("/match");
+    }
+
 </script>
 
 <section class="container">
@@ -25,7 +29,7 @@
             </div>
         </div>
         <div class="row align-items-center justify-content-center">
-            <!-- <span class="btn btn-warning text-center mb-0 px-4 mx-3" on:click={()=> {matchBans = match.event.bans}} data-toggle="modal" data-target="#ModalBans"><i class="fas fa-chess-king"></i> PICKS </span> -->
+            <span class="btn btn-warning text-center mb-0 px-4 mx-3" on:click={picksMatch(match._id)}><i class="fas fa-chess-king"></i> PICKS </span>
             <span class="btn btn-danger text-center mb-0 px-4 mx-3" on:click={()=> {matchBans = match.event.bans}} data-toggle="modal" data-target="#ModalBans"><i class="fas fa-ban"></i> BANS </span>
         </div>
         <div class="row align-items-center justify-content-center mb-3 mt-0">

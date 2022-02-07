@@ -2,8 +2,6 @@
 	import io from 'socket.io-client';
 	import Push from 'push.js';
 
-	import { fade } from 'svelte/transition';
-
 	import { goto } from '@sapper/app';
 	import { onMount } from 'svelte';
 
@@ -22,8 +20,8 @@
 
 	// SEM "/" NO FINAL
 	// const fetchURL = "http://localhost:8081";
-	const fetchURL = "https://projeto.br-rgt.net";
-	// let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
+	// const fetchURL = "https://projeto.br-rgt.net";
+	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']
