@@ -13,8 +13,7 @@
 
 	// SEM "/" NO FINAL
 	// const fetchURL = "http://localhost:8081";
-	// const fetchURL = "https://projeto.br-rgt.net";
-	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
+	let fetchURL = 'https://bpl-ih-render.onrender.com';
 
 	const socket = io(fetchURL, {
 		transports: ['websocket']

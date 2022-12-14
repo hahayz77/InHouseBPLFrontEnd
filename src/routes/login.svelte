@@ -4,8 +4,7 @@
 	
 	// SEM "/" NO FINAL
 	// let fetchURL = "http://localhost:8081";
-	// let fetchURL = 'https://projeto.br-rgt.net';
-	let fetchURL = 'https://app-inhouseleagueblp.herokuapp.com';
+	let fetchURL = 'https://bpl-ih-render.onrender.com';
 
 	// ########################################### Variáveis do Usuário
 	let username = '';
