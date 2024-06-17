@@ -1,5 +1,8 @@
 # InHouse Battlerite League 0.2
 
+# Repositório Backend 
+https://github.com/hahayz77/InHouseBPLBackEnd
+
 ## Para fazer
 - [x] Histórico de Partidas;
 - [ ] Histórico de Reports;
